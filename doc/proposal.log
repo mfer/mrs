@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.11)  17 OCT 2014 15:49
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.11)  17 OCT 2014 17:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -123,7 +123,7 @@ Before submitting the final camera ready copy, remember to:
 [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./proposal.aux) )
 (\end occurred inside a group at level 1)
 
-### simple group (level 1) entered at line 35 ({)
+### simple group (level 1) entered at line 39 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
  902 strings out of 495004
@@ -137,7 +137,7 @@ Here is how much of TeX's memory you used:
 r/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/urw/times/utmri8a.pfb>
-Output written on proposal.pdf (1 page, 41814 bytes).
+Output written on proposal.pdf (1 page, 40997 bytes).
 PDF statistics:
  21 PDF objects out of 1000 (max. 8388607)
  14 compressed objects within 1 object stream

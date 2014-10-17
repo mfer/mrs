@@ -10,33 +10,37 @@
   }
   \maketitle
   \begin{abstract}
-    The main objective of this Practical Project is extend and validate 
+    The main objective of this Practical Project is to extend and validate 
     the propositions of the Seminar chosen paper. The extension proposed
-    is solve other problem with the approximation algorithm studied. And
-    the validation are obtained through simulations on best(worst)-case scenarios.
+    is to solve other problem with the approximation algorithm studied and
+    the validation will be obtained through simulations on both best and worst case scenarios.
   \end{abstract}
   \section{Introduction}
-    The chosen paper \cite{pengjun:2014} solves the Maximum-Weighted Independent Set of Links Problem [{\bf MWIS}]
-    using algorithms designed under the protocol interference model. We are interested in the greedy one, called {\bf gWIS}.
+    The chosen paper \cite{pengjun:2014} solves the Maximum-Weighted Independent Set of Links Problem ({\bf MWIS})
+    using algorithms designed under the {\it protocol} interference model. 
+    In general, a protocol interference model specifies a pairwise conflict relations among all links.
+    A subset is independent if all links are pairwise conflict-free.
+    This paper describes several algorithms, we are interested in the greedy one named {\bf gWIS}.
 
     There is a related work on Wireless Communications \cite{olga:2012} in which the authors made a proof (Theorem 4.5) that 
-    any algorithm to solve {\bf MWIS} is a constant approximation for the Multi-Rate Scheduling Problem [{\bf MRS}].
+    any algorithm to solve {\bf MWIS} is a constant approximation for the Multi-Rate Scheduling Problem ({\bf MRS}).
 
     So, our proposed contributions are:
     \begin{enumerate} 
-      \item obtaining a constant approximation to the {\bf MRS} through the fast and simple algorithm ({\bf gWIS}).
-      \item implementing the {\bf stripWIS} algorithm (which make use of {\bf gWIS}) to simulate best and worst case scenarios
+      \item obtains a constant approximation algorithm to {\bf MRS}
+      \item implements {\bf gWIS}
+      \item simulates both best and worst case scenarios
     \end{enumerate}
   \section{Practical Project Tasks}
-    This project is divided in two parts: one analytical and other experimental.
+    This project is divided in two parts: analytical and experimental.
   \subsection{Analytical}
     Into this part, 
-    the main task is the mapping of the {\bf MRS} \cite{olga:2012} 
+    the main task will be map the {\bf MRS} \cite{olga:2012} 
     into a kind of input to the {{\bf gWIS} described at \cite{pengjun:2014}.
-    This map must preserve the approximation guaratees.
+    This map must preserve the approximation guarantees.
   \subsection{Experimental}
-    Simulations will validate {\bf gWIS} in best and worst case scenarios.
-    The implementation code is avaiable at github \cite{mfer:gitMRS}.
+    Simulations will be used to validate {\bf gWIS} in best and worst case scenarios.
+    The implementation code will be available at github \cite{mfer:gitMRS}.
   \begin{thebibliography}{1}
     \bibitem{olga:2012}
       Olga Goussevskaia et al, 
@@ -49,8 +53,8 @@
       IEEE INFOCOM 2014 - \hskip 1em plus 0.5em minus 0.4em\relax 
       IEEE Conference on Computer Communications.
     \bibitem{mfer:gitMRS}
-      MRS,
-      \emph{Multi-Rate Scheduling},
+      Flavio Haueisen {\it and} Manasses Ferreira,
+      \emph{Multi-Rate Scheduling source-code},
       GitHub Repository,
       https://github.com/mfer/mrs.git
   \end{thebibliography}
