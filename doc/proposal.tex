@@ -20,7 +20,7 @@
     using algorithms designed under the {\it protocol} interference model. 
     In general, a protocol interference model specifies a pairwise conflict relations among all links.
     A subset is independent if all links are pairwise conflict-free.
-    This paper describes several algorithms, we are interested in the greedy one named {\bf gWIS}.
+    This paper describes several algorithms, we are interested in the orientation one named {\bf OrientWIS}.
 
     There is a related work on Wireless Communications \cite{olga:2012} in which the authors made a proof (Theorem 4.5) that 
     any algorithm to solve {\bf MWIS} is a constant approximation for the Multi-Rate Scheduling Problem ({\bf MRS}).
@@ -28,7 +28,7 @@
     So, our proposed contributions are:
     \begin{enumerate} 
       \item obtains a constant approximation algorithm to {\bf MRS}
-      \item implements {\bf gWIS}
+      \item implements {\bf OrientWIS}
       \item simulates both best and worst case scenarios
     \end{enumerate}
   \section{Practical Project Tasks}
@@ -36,12 +36,12 @@
   \subsection{Analytical}
     Into this part, 
     the main task will be map the {\bf MRS} \cite{olga:2012} 
-    into a kind of input to the {{\bf gWIS} described at \cite{pengjun:2014}.
+    into a kind of input to the {{\bf OrientWIS} described at \cite{pengjun:2014}.
     This map must preserve the approximation guarantees.
   \subsection{Experimental}
-    Simulations will be used to validate {\bf gWIS} in best and worst case scenarios.
+    Simulations will be used to validate {\bf OrientWIS} in best and worst case scenarios.
     The instances used by simulations for best and worst case scenarios will be manually crafted
-    based on the nature of the {\bf gWIS} algorithm.
+    based on the nature of the {\bf OrientWIS} algorithm.
     The implementation code will be available at github \cite{mfer:gitMRS}.
   \begin{thebibliography}{1}
     \bibitem{olga:2012}

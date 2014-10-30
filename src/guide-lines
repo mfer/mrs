@@ -1,0 +1,40 @@
+Flow
+====================================================================
+
+L ---> DG_z(L), A
+	DG_z(L) ---> w, G, A
+		G ---> D
+			D ---> N^in_D, N^out_D
+		w ---> PDA(eps), PG(x)
+			eps ---> PDA(eps)
+			N^in_D ---> PDA(eps)
+			N^out_D ---> PDA(eps)
+				PDA(eps) ---> x
+		A ---> PG(x)
+					x ---> PG(x)
+						PG(x) ---> I
+
+
+
+Ensure Function(Require)
+// Description
+====================================================================
+
+w,DG_z FUNCION_NAME (L)
+// Construct the Disk Graph DGz, definition-4.4 from olga:2012, using the set of links L
+// And the weight w for the links using the data-rates
+
+G,A FUNCION_NAME (DGz)
+// Construct the conflict graph G and the vertex set A from DGz
+
+D FUNCION_NAME (G)
+// Assign an orientation on the conflict edges (needs more study on how to do)
+
+N^in_D,N^out_D FUNCION_NAME (D)
+// Establish for all links the in and out edges
+
+x PDA(w, N^in_D, N^out_D, eps)
+// Price-Directive Algorithm
+
+I <-- PG(w, A, x)
+// Prune-and-Grow algorithm
