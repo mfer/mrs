@@ -25,7 +25,19 @@ public class MRS{
 	public static void main(String[] args) {
 		for(int i = 0;i<args.length;i++) {
 		     System.out.println(args[i]);
+		}
+
+		ArrayList<Link> links = new ArrayList<Link>();
+		links.add(new Link(0.0,0.0,2.0,0.0));
+		links.add(new Link(2.0,1.0,2.0,3.0));
+		System.out.println(links.size());
+		for(int i = 0;i<links.size();i++) {
+		     System.out.println("link: " + i);
+		     System.out.println("    sender:   (" + links.get(i).x_sender + ", " + links.get(i).y_sender + ")");
+		     System.out.println("    receiver: (" + links.get(i).x_receiver + ", " + links.get(i).y_receiver + ")");
+		     System.out.println("    size: " + links.get(i).length);
 		}		
+
 
 		System.out.println("link_into_graph");
 
