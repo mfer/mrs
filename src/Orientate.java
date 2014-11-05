@@ -17,7 +17,7 @@
 */
 public class Orientate{
 
-  Grafo D;
+  static Grafo D;
 
   static Grafo edge(Grafo G){
     D = new Grafo(G.links.size(),false);
@@ -35,7 +35,7 @@ public class Orientate{
                               Math.abs(link.x_receiver - adjacente.x_sender) +
                               Math.abs(link.y_receiver - adjacente.y_sender) *
                               Math.abs(link.y_receiver - adjacente.y_sender));
-        if(adjacente.inteference_radius >= dist){
+        if(adjacente.interference_radius >= dist_ab){
           // Direcao D de adjacente para link
           D.adjacencia.get(adj).add(linkIndex);
         }else{//estah em conflito, se a direcao nao eh b-->a, entao...
