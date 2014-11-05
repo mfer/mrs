@@ -21,6 +21,51 @@ public class MRS{
 
 	//I PG(w, A, x)
 	// Prune-and-Grow algorithm
+	private static void PG(){
+		int i=1;
+		ArrayList<Double> w = new ArrayList<Double>();
+		w.add(5.0);
+		w.add(1.0);
+		w.add(2.0);
+		w.add(3.0);
+		w.add(4.0);
+		w.add(5.0);
+		
+		System.out.println("Prune-Phase");
+
+		//B ← A, S ← ∅; //S is a stack
+		Set<Integer> B = new TreeSet<Integer>();
+		B.addAll(Arrays.asList(1,2,3,4,5));
+		Stack S = new Stack();
+		
+    while(!B.isEmpty()){
+    	System.out.println(B);
+
+				//a ← a x-surplus link of B;
+    		int a = i;
+    		System.out.println("a= "+a);
+
+				//B ← B ∖ {a};
+    		B.removeAll(Arrays.asList(a));    		
+
+				//w (a) ← w (a) − w (S ∩ N (a));
+				int b = 0;
+				w.set(a,w.get(a) - w.get(b));
+				System.out.println(i+" "+w.get(i));
+
+
+				//if w (a) > 0, push a onto S; 	
+    	
+    	i++;
+    }
+
+		for(i = 0;i<w.size();i++) {
+		     System.out.println("w: " + i);
+		     System.out.println("    weight: " + w.get(i));
+		}		
+
+		System.out.println("Grow-Phase");
+	}
 
 	public static void main(String[] args) {
 		for(int i = 0;i<args.length;i++) {
@@ -28,8 +73,9 @@ public class MRS{
 		}
 
 		ArrayList<Link> links = new ArrayList<Link>();
-		links.add(new Link(0.0,0.0,2.0,0.0));
-		links.add(new Link(2.0,1.0,2.0,3.0));
+		links.add(new Link(0.0,0.0,2.0,0.0, 1.0));
+		links.add(new Link(2.0,1.0,2.0,3.0, 1.0));
+
 		System.out.println(links.size());
 		for(int i = 0;i<links.size();i++) {
 		     System.out.println("link: " + i);
@@ -50,6 +96,6 @@ public class MRS{
 		System.out.println("PDA");
 
 		System.out.println("PG");
-
+		PG();
 	}
 }
