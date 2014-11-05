@@ -2,17 +2,17 @@ Flow
 ====================================================================
 
 L ---> DG_z(L), A
-	DG_z(L) ---> w, G, A
-		G ---> D
-		w ---> PDA(eps), PG(x)
-		A ---> PG(x)
-			D ---> N^in_D, N^out_D						
-				N^in_D ---> PDA(eps)
-				N^out_D ---> PDA(eps)
-				eps ---> PDA(eps)
-					PDA(eps) ---> x		
-						x ---> PG(x)
-							PG(x) ---> I
+  DG_z(L) ---> w, G, A
+    G ---> D
+    w ---> PDA(eps), PG(x)
+    A ---> PG(x)
+      D ---> N^in_D, N^out_D            
+        N^in_D ---> PDA(eps)
+        N^out_D ---> PDA(eps)
+        eps ---> PDA(eps)
+          PDA(eps) ---> x    
+            x ---> PG(x)
+              PG(x) ---> I
 
 
 
