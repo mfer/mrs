@@ -5,17 +5,8 @@ public class MRS{
   //w,DG_z link_into_graph (L)
   // Construct the Disk Graph DGz nd the weight w for the links using the data-rates
   // definition-4.4 from olga:2012, using the set of links L
-  static GrafoRadial link_into_graph(ArrayList<Link> links, ArrayList<Double> w){
-    GrafoRadial DGz = new GrafoRadial(10,false);
-
-    for(int i = 0; i < links.size(); i++){
-
-      System.out.println(i+" "+links.get(i).interference_radius);
-      w.add(links.get(i).interference_radius);
-    }
-
-    return DGz;    
-  }
+    //implemented at GrafoRadial as a constructor
+    //and at Link as the set_weight method
 
 //########################################################################################
   //G,A graph_into_protocol (DGz)
@@ -112,17 +103,17 @@ public class MRS{
 
   //I PG(w, A, x)
   // Prune-and-Grow algorithm
-  private static Set<Integer> PG(Stack<Integer> x){
+  private static Set<Integer> PG(Stack<Integer> x, ArrayList<Link> links){
     int i=0, a;
-    ArrayList<Double> w = new ArrayList<Double>();
-    w.add(0.0);
-    w.add(1.0);
-    w.add(2.0);
-    w.add(3.0);
-    w.add(4.0);
-    w.add(5.0);
-    w.add(6.0);
-    w.add(7.0);
+    links.get(0).set_weight(0.0);
+    links.get(1).set_weight(1.0);
+    links.get(2).set_weight(2.0);
+    links.get(3).set_weight(3.0);
+    links.get(4).set_weight(4.0);
+    links.get(5).set_weight(5.0);
+    links.get(6).set_weight(6.0);
+    links.get(7).set_weight(7.0);
+
     
     System.out.println("Prune-Phase");
       //B ← A, S ← ∅; //S is a stack
@@ -136,10 +127,11 @@ public class MRS{
         B.removeAll(Arrays.asList(a));
         //w(a) ← w (a) − w (S ∩ N (a));
         int b = 0;
-        w.set(a,w.get(a) - w.get(b));
-        System.out.println(a+" "+w.get(a));
+
+        System.out.println("setting "+a);
+        links.get(a).set_weight(links.get(a).w() - links.get(b).w());
         //if w(a) > 0, push a onto S;
-        if(w.get(a) > 0.0) S.push(new Integer(a));
+        if(links.get(a).w() > 0.0) S.push(new Integer(a));
         i++;
       }
 
@@ -175,8 +167,14 @@ public class MRS{
     }
 
     ArrayList<Link> links = new ArrayList<Link>();
+    links.add(new Link(0.0,0.0,2.0,0.0, 1.0));
     links.add(new Link(0.0,0.0,2.0,0.0, 2.0));
     links.add(new Link(2.0,1.0,2.0,3.0, 4.0));    
+    links.add(new Link(0.0,0.0,2.0,0.0, 8.0));
+    links.add(new Link(2.0,1.0,2.0,3.0, 16.0));
+    links.add(new Link(0.0,0.0,2.0,0.0, 32.0));
+    links.add(new Link(2.0,1.0,2.0,3.0, 64.0));
+    links.add(new Link(2.0,1.0,2.0,3.0, 128.0));
 /*
     System.out.println(links.size());
     for(int i = 0;i<links.size();i++) {
@@ -190,17 +188,13 @@ public class MRS{
 
 //__________________________________________________________________________________________________________
     System.out.println("BEGIN");
-
-
-//__________________________________________________________________________________________________________
-    GrafoRadial DGz;
-    ArrayList<Double> w = new ArrayList<Double>();
-    System.out.println("link_into_graph");
-    DGz = link_into_graph(links, w);
-
+//__________________________________________________________________________________________________________     
+    System.out.println("link_into_graph");    
+    GrafoRadial DGz = new GrafoRadial(links);
     for(int i = 0;i<links.size();i++) {
       System.out.println("  link: " + i);
-      System.out.println("    w:   " + w.get(i));
+      System.out.println("    set_weight:   " + links.get(i).set_weight( new Double(i) ));
+      System.out.println("    get_weight:   " + links.get(i).w());
     }    
 
 
@@ -231,7 +225,7 @@ public class MRS{
 
 //__________________________________________________________________________________________________________
     System.out.println("PG");
-    System.out.println("I = " + PG(x));
+    System.out.println("I = " + PG(x, links));
 
 
 //__________________________________________________________________________________________________________
