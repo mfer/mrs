@@ -1,14 +1,12 @@
 import java.io.*;
 import java.util.*;
 
-public class MRS{
-  //w,DG_z link_into_graph (L)
-  // Construct the Disk Graph DGz nd the weight w for the links using the data-rates
-  // definition-4.4 from olga:2012, using the set of links L
-    //implemented at GrafoRadial as a constructor
-    //and at Link as the set_weight method
+import static java.awt.geom.AffineTransform.*;
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import javax.swing.*;
 
-//########################################################################################
+public class MRS{
   //G,A graph_into_protocol (DGz)
   // Construct the conflict graph G and the vertex set A from DGz
   static Grafo graph_into_protocol(){
@@ -128,7 +126,7 @@ public class MRS{
         //w(a) ← w (a) − w (S ∩ N (a));
         int b = 0;
 
-        System.out.println("setting "+a);
+        //System.out.println("setting "+a);
         links.get(a).set_weight(links.get(a).w() - links.get(b).w());
         //if w(a) > 0, push a onto S;
         if(links.get(a).w() > 0.0) S.push(new Integer(a));
@@ -140,7 +138,7 @@ public class MRS{
       Set<Integer> I = new TreeSet<Integer>();
       //while S ∕= ∅,
       while(!S.empty()){
-        //pop the top link a from S;
+        //pop the top link a from S; 
         a = S.pop();
 //        System.out.println("pop "+a);
 
@@ -160,6 +158,75 @@ public class MRS{
     return I;
   }
 
+  public static void draw(ArrayList<Link> links, boolean draw_oval){
+    JFrame t = new JFrame();
+    t.add(new JComponent() {
+
+      private final int ARR_SIZE = 4;
+
+      void drawArrow(Graphics g1, double x1, double y1, double x2, double y2) {
+        Graphics2D g = (Graphics2D) g1.create();
+
+        double dx = x2 - x1, dy = y2 - y1;
+        double angle = Math.atan2(dy, dx);
+        int len = (int) Math.sqrt(dx*dx + dy*dy);
+        AffineTransform at = AffineTransform.getTranslateInstance(x1, y1);
+        at.concatenate(AffineTransform.getRotateInstance(angle));
+        g.transform(at);
+
+        // Draw horizontal arrow starting in (0, 0)
+        g.drawLine(0, 0, len, 0);
+
+        if(draw_oval){
+          g.fillPolygon(new int[] {len, len-ARR_SIZE, len-ARR_SIZE, len},
+            new int[] {0, -ARR_SIZE, ARR_SIZE, 0}, 4);
+        }
+      }
+
+      public void paintComponent(Graphics g) {
+        for(Link link : links){
+
+          int linkIndex = links.indexOf(link);
+
+          int R = (int) (Math.random( )*256);
+          int G = (int)(Math.random( )*256);
+          int B= (int)(Math.random( )*256);
+          Color randomColor = new Color(R, G, B);
+          g.setColor(randomColor);
+
+          int shift = 20;
+
+          drawArrow(g, 100*links.get(linkIndex).sender.x + shift, 
+            100*links.get(linkIndex).sender.y + shift,
+            100*links.get(linkIndex).receiver.x + shift, 
+            100*links.get(linkIndex).receiver.y + shift );          
+
+          g.drawOval((int)(100*links.get(linkIndex).sender.x)-5 + shift, 
+            (int)(100*links.get(linkIndex).sender.y-5) + shift,
+            10,10);
+
+          if(draw_oval){
+
+
+            g.drawString(""+linkIndex,
+              (int)(100*links.get(linkIndex).sender.x)-5 + shift, 
+              (int)(100*links.get(linkIndex).sender.y-5 + shift));
+
+            int r = (int)(200*links.get(linkIndex).sender.distance(links.get(linkIndex).receiver));
+            g.drawOval((int)(100*links.get(linkIndex).sender.x)-r/2 + shift, 
+              (int)(100*links.get(linkIndex).sender.y-r/2 + shift),
+              r,r);
+          }
+        }       
+        
+      }
+    });
+
+    t.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    t.setSize(500, 500);
+    t.setVisible(true);
+  }
+
 //########################################################################################
   public static void main(String[] args) {
     for(int i = 0;i<args.length;i++) {
@@ -167,15 +234,17 @@ public class MRS{
     }
 
     ArrayList<Link> links = new ArrayList<Link>();
-    links.add(new Link(0.0,0.0,2.0,0.0, 1.0));
-    links.add(new Link(0.0,0.0,2.0,0.0, 2.0));
-    links.add(new Link(2.0,1.0,2.0,3.0, 4.0));    
-    links.add(new Link(0.0,0.0,2.0,0.0, 8.0));
-    links.add(new Link(2.0,1.0,2.0,3.0, 16.0));
-    links.add(new Link(0.0,0.0,2.0,0.0, 32.0));
-    links.add(new Link(2.0,1.0,2.0,3.0, 64.0));
-    links.add(new Link(2.0,1.0,2.0,3.0, 128.0));
-/*
+    links.add(new Link(3.0, 3.0, 3.0, 1.0, 2.0));
+    links.add(new Link(2.0, 1.0, 4.0, 4.0, 2.0));
+    links.add(new Link(0.0, 4.0, 2.0, 2.0, 2.0));
+    links.add(new Link(1.0, 2.0, 4.0, 2.0, 2.0));
+    links.add(new Link(4.0, 1.0, 0.0, 1.0, 2.0));
+    links.add(new Link(2.0, 4.0, 3.0, 2.0, 2.0));
+    links.add(new Link(0.0, 0.0, 1.0, 1.0, 2.0));
+    links.add(new Link(3.0, 0.0, 0.0, 3.0, 2.0));
+
+//  draw(links);
+/*    
     System.out.println(links.size());
     for(int i = 0;i<links.size();i++) {
       System.out.println("link: " + i);
@@ -187,16 +256,16 @@ public class MRS{
 */
 
 //__________________________________________________________________________________________________________
-    System.out.println("BEGIN");
+    System.out.println("BEGIN");        
 //__________________________________________________________________________________________________________     
-    System.out.println("link_into_graph");    
-    GrafoRadial DGz = new GrafoRadial(links);
-    for(int i = 0;i<links.size();i++) {
-      System.out.println("  link: " + i);
-      System.out.println("    set_weight:   " + links.get(i).set_weight( new Double(i) ));
-      System.out.println("    get_weight:   " + links.get(i).w());
-    }    
 
+  //w,DG_z link_into_graph (L)
+  // Construct the Disk Graph DGz and the weight w for the links using the data-rates
+  // definition-4.4 from olga:2012, using the set of links L
+    //implemented at GrafoRadial as a constructor
+    //and at Link as the set_weight method called by th constructor.
+    System.out.println("link_into_graph");
+    GrafoRadial DGz = new GrafoRadial(links);
 
 //__________________________________________________________________________________________________________
     Grafo G;
