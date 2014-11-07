@@ -263,7 +263,7 @@ public class MRS{
   // Construct the Disk Graph DGz and the weight w for the links using the data-rates
   // definition-4.4 from olga:2012, using the set of links L
     //implemented at GrafoRadial as a constructor
-    //and at Link as the set_weight method called by th constructor.
+    //and at Link as the set_weight method called by the constructor.
     System.out.println("link_into_graph");
     GrafoRadial DGz = new GrafoRadial(links);
 

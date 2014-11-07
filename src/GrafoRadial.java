@@ -2,6 +2,8 @@ import java.util.*;
 
 public class GrafoRadial {
 
+  public int adj[][];
+
   private void set_weights(ArrayList<Link> links){
     int idx_lx; //link with min(beta_x^(1/alpha)*l_x)
     double len_lx;
@@ -80,24 +82,46 @@ public class GrafoRadial {
           //System.out.println("  i: " + i + "  j: " + j);          
           adj[i][j]=1;
           adj[j][i]=1;
-          linked.add(new Link(links.get(i).sender.x, links.get(i).sender.y, 
-            links.get(j).sender.x, links.get(j).sender.y, 2.0));
+
           degree[i]++;
           degree[j]++;
+
+          //linked.add(new Link(links.get(i).sender.x, links.get(i).sender.y, 
+          //  links.get(j).sender.x, links.get(j).sender.y, 2.0));          
         }
       }      
     }
 
     //MRS.draw(linked, false);
+
+    this.adj=adj;
   }
 
   //create a special disk graph (DGz) from the links
   public GrafoRadial(ArrayList<Link> links){
+    int i,j;
 
     //set adjacency using geometric intersection
     set_adjacency(links);
-
+/*
+    System.out.print("-  ");
+    for(i=0;i<links.size();i++)
+      System.out.print(i+" ");
+    System.out.println();
+    for(i=0;i<links.size();i++){
+      System.out.print(i+": ");
+      for(j=0;j<=i;j++){
+          System.out.print(adj[i][j]+" ");
+      }
+      System.out.println();
+    }
+*/
     //set the weight of the links
     set_weights(links);
+
+    for(i=0;i<links.size();i++){
+      System.out.println("Link "+i+" weight "+links.get(i).weight);
+    }
+
   }    
 }
