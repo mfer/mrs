@@ -1,8 +1,83 @@
 import java.util.*;
 
+import static java.awt.geom.AffineTransform.*;
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import javax.swing.*;
+
+
 public class GrafoRadial {
 
   public int adj[][];
+
+  public static void draw(ArrayList<Link> links, boolean draw_oval){
+    JFrame t = new JFrame();
+    t.add(new JComponent() {
+
+      private final int ARR_SIZE = 4;
+
+      void drawArrow(Graphics g1, double x1, double y1, double x2, double y2) {
+        Graphics2D g = (Graphics2D) g1.create();
+
+        double dx = x2 - x1, dy = y2 - y1;
+        double angle = Math.atan2(dy, dx);
+        int len = (int) Math.sqrt(dx*dx + dy*dy);
+        AffineTransform at = AffineTransform.getTranslateInstance(x1, y1);
+        at.concatenate(AffineTransform.getRotateInstance(angle));
+        g.transform(at);
+
+        // Draw horizontal arrow starting in (0, 0)
+        g.drawLine(0, 0, len, 0);
+
+        if(draw_oval){
+          g.fillPolygon(new int[] {len, len-ARR_SIZE, len-ARR_SIZE, len},
+            new int[] {0, -ARR_SIZE, ARR_SIZE, 0}, 4);
+        }
+      }
+
+      public void paintComponent(Graphics g) {
+        for(Link link : links){
+
+          int linkIndex = links.indexOf(link);
+
+          int R = (int) (Math.random( )*256);
+          int G = (int)(Math.random( )*256);
+          int B= (int)(Math.random( )*256);
+          Color randomColor = new Color(R, G, B);
+          g.setColor(randomColor);
+
+          int shift = 20;
+
+          drawArrow(g, 100*links.get(linkIndex).sender.x + shift, 
+            100*links.get(linkIndex).sender.y + shift,
+            100*links.get(linkIndex).receiver.x + shift, 
+            100*links.get(linkIndex).receiver.y + shift );          
+
+          g.drawOval((int)(100*links.get(linkIndex).sender.x)-5 + shift, 
+            (int)(100*links.get(linkIndex).sender.y-5) + shift,
+            10,10);
+
+          if(draw_oval){
+
+
+            g.drawString(""+linkIndex,
+              (int)(100*links.get(linkIndex).sender.x)-5 + shift, 
+              (int)(100*links.get(linkIndex).sender.y-5 + shift));
+
+            int r = (int)(200*links.get(linkIndex).sender.distance(links.get(linkIndex).receiver));
+            g.drawOval((int)(100*links.get(linkIndex).sender.x)-r/2 + shift, 
+              (int)(100*links.get(linkIndex).sender.y-r/2 + shift),
+              r,r);
+          }
+        }       
+        
+      }
+    });
+
+    t.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    t.setSize(500, 500);
+    t.setVisible(true);
+  }
 
   private void set_weights(ArrayList<Link> links){
     int idx_lx; //link with min(beta_x^(1/alpha)*l_x)
@@ -70,7 +145,7 @@ public class GrafoRadial {
     int adj[][] = new int[links.size()][links.size()];
     ArrayList<Link> linked = new ArrayList<Link>();
 
-    //MRS.draw(links, true);
+    //draw(links, true);
 
     for(i=0;i<links.size();i++){
       degree[i]=0;
@@ -86,13 +161,13 @@ public class GrafoRadial {
           degree[i]++;
           degree[j]++;
 
-          //linked.add(new Link(links.get(i).sender.x, links.get(i).sender.y, 
-          //  links.get(j).sender.x, links.get(j).sender.y, 2.0));          
+          linked.add(new Link(links.get(i).sender.x, links.get(i).sender.y, 
+            links.get(j).sender.x, links.get(j).sender.y, 2.0));          
         }
       }      
     }
 
-    //MRS.draw(linked, false);
+    draw(linked, false);
 
     this.adj=adj;
   }

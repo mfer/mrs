@@ -14,7 +14,7 @@ public class Link extends Circle{
   double length;
   double interference_radius;
   double weight;
-  int x_surplus;
+  double x_surplus;
 
   public Link(double x_sender, double y_sender,
               double x_receiver, double y_receiver,
@@ -45,12 +45,12 @@ public class Link extends Circle{
     return weight;
   }
 
-  public Integer set_x_surplus(int value){
+  public Double set_x_surplus(Double value){
     this.x_surplus = value;
     return value;
   }    
 
-  public Integer x_surplus(){
+  public Double x_surplus(){
     return x_surplus;
   }
 }
