@@ -31,9 +31,8 @@ public class Link extends Circle{
     this.y_sender = y_sender;
     this.y_receiver = y_receiver;
 
-    this.interference_radius = interference_radius;
-
     length = receiver.distance(sender);
+    this.interference_radius = length*interference_radius;    
   }
 
   public Double set_weight(Double value){
@@ -67,10 +66,12 @@ public class Link extends Circle{
   public static Double get_max_x(ArrayList<Link> links, ArrayList<ArrayList<Integer>> Ins){
     double max_x = 0.0;
     System.out.println("get_max_x");
-    for ( int i=0; i< Ins.size(); i++ ){
-      //for ( int j=0; j< Ins.get(i).size(); j++ ){
-        System.out.println("i "+i);
-      //}
+    for ( ArrayList<Integer> link : Ins){
+      int i = Ins.indexOf(link);
+      for ( int j : Ins.get(i)){
+        //System.out.println("i "+i+" j "+j+" x="+links.get(j).x);
+        if(max_x < links.get(j).x) max_x = links.get(j).x;
+      }
     }
     return max_x;
   }

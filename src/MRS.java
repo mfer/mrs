@@ -9,13 +9,13 @@ public class MRS{
     }
 
     ArrayList<Link> links = new ArrayList<Link>();
-    links.add(new Link(2.0, 2.0, 2.5, 1.5, 0.0));
-    links.add(new Link(3.5, 2.0, 3.5, 3.0, 0.0));
-    links.add(new Link(2.5, 1.0, 3.5, 1.5, 0.0));
-    links.add(new Link(0.8, 1.0, 2.0, 0.8, 0.0));
-    links.add(new Link(0.5, 2.0, 0.5, 3.0, 0.0));
-    links.add(new Link(1.5, 3.0, 1.5, 2.5, 0.0));
-    links.add(new Link(2.5, 3.0, 3.5, 2.5, 0.0));
+    links.add(new Link(2.0, 2.0, 2.5, 1.5, 1.0));
+    links.add(new Link(3.5, 2.0, 3.5, 3.0, 1.0));
+    links.add(new Link(2.5, 1.0, 3.5, 1.5, 1.0));
+    links.add(new Link(0.8, 1.0, 2.0, 0.8, 1.0));
+    links.add(new Link(0.5, 2.0, 0.5, 3.0, 1.0));
+    links.add(new Link(1.5, 3.0, 1.5, 2.5, 1.0));
+    links.add(new Link(2.5, 3.0, 3.5, 2.5, 1.0));
 
 /*    
     System.out.println(links.size());
@@ -41,25 +41,29 @@ public class MRS{
     GrafoRadial DGz = new GrafoRadial(links);
 
     //TODO: finish GrafoRadial.set_weight
-
 //__________________________________________________________________________________________________________
 
   //G,A graph_into_protocol (DGz)
   // Construct the conflict graph G and the vertex set A from DGz
-    Grafo G = new Grafo(10,false);;
+    Grafo G = new Grafo(links);
     System.out.println("graph_into_protocol");
-
-    //TODO:    
-
 //__________________________________________________________________________________________________________
 
   //D orientate_edge (G)
-  // Assign an orientation on the conflict edges (needs more study on how to do)
+  // Assign an orientation on the conflict edges
     Grafo D;
     System.out.println("orientate_edge");
-    D = Orientate.edge(G);
+    D = Orientate.edge(G);    
 
-
+/*
+    GrafoRadial.draw(D.links, true);
+    for(ArrayList<Integer> link : D.adjacencia){
+      int linkIndex = D.adjacencia.indexOf(link);
+      for(int adj : link){
+        System.out.println(linkIndex+" <-- "+adj);
+      }
+    }
+*/
 //__________________________________________________________________________________________________________
 
   //N^in_D,N^out_D get_in_out (D)
@@ -68,8 +72,23 @@ public class MRS{
     ArrayList<ArrayList<Integer>> Ins = new ArrayList<ArrayList<Integer>>();
     ArrayList<ArrayList<Integer>> Outs = new ArrayList<ArrayList<Integer>>();
     GetInOut.getInOut(D, Ins, Outs);
+/*
+    System.out.println("Outs");
+    for(ArrayList<Integer> link : Outs){
+      int linkIndex = Outs.indexOf(link);
+      for(int adj : link){
+        System.out.println(linkIndex+" --> "+adj);
+      }
+    }
 
-
+    System.out.println("Ins");
+    for(ArrayList<Integer> link : Ins){
+      int linkIndex = Ins.indexOf(link);
+      for(int adj : link){
+        System.out.println(linkIndex+" <-- "+adj);
+      }
+    }
+*/
 //__________________________________________________________________________________________________________
   //x PDA(w, N^in_D, N^out_D, eps)
   // Price-Directive Algorithm

@@ -13,13 +13,17 @@ public class GetInOut{
     Ins.clear();
     Outs.clear();
 
+    for(int i = 0; i < D.links.size(); i++){
+      Outs.add( new ArrayList<Integer>() );
+    }
+
     for(Link link : D.links){
       int linkIndex = D.links.indexOf(link);
-      Outs.add(D.adjacencia.get(linkIndex));
-        for(Integer out : Outs.get(linkIndex)){
-          //in neighbors of A are out neighbors of other links
-          Ins.get(out).add(linkIndex);
-        }
+      Ins.add(D.adjacencia.get(linkIndex));
+      for(int out : Ins.get(linkIndex)){
+        //in neighbors of A are out neighbors of other links
+        Outs.get(out).add(linkIndex);
+      }
     }
   }
 }

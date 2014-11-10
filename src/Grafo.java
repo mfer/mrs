@@ -18,6 +18,25 @@ public class Grafo{
       }
     }
 
+    //make the graph for the unidirectional model using a given set of links
+    public Grafo (ArrayList<Link> links){
+      int i,j;
+      this.links = links;
+      this.adjacencia = new ArrayList<ArrayList<Integer>>();
+      this.bidirecional = false;
+
+      for(i=0;i<links.size();i++){      
+        this.adjacencia.add( new ArrayList<Integer>() );
+        for(j=i+1;j<links.size();j++){
+          if( links.get(i).intersects(links.get(j)) ){
+            //System.out.println("  i: " + i + "  j: " + j);          
+            setAdjacencia(i,j);
+          }
+        }      
+      }
+
+    }
+
     public void setAdjacencia(int linkId1, int linkId2){
       //se o grafo for bidirecional,linkId1 < linkId2
       //ou seja, a adjacencia será marcada na lista do link de menor id
@@ -33,4 +52,6 @@ public class Grafo{
         adjacencia.get(linkId1).add(linkId2);
       }
     }
+
+
 }
