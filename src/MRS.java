@@ -3,6 +3,26 @@ import java.util.*;
 
 public class MRS{
 
+  static HashMap<Double,Integer> dataRateHashB=new HashMap<Double,Integer>();
+  static HashMap<Double,Integer> dataRateHashN=new HashMap<Double,Integer>();
+
+  private static void createDataRateTableB(){
+    dataRateHashB.put(new Double(4), new Integer(1));
+    dataRateHashB.put(new Double(6), new Integer(2));
+    dataRateHashB.put(new Double(8), new Integer(6));
+    dataRateHashB.put(new Double(10), new Integer(11));
+  }
+  private static void createDataRateTableN(){
+    dataRateHashN.put(new Double(14), new Integer(30));
+    dataRateHashN.put(new Double(17), new Integer(60));
+    dataRateHashN.put(new Double(19), new Integer(90));
+    dataRateHashN.put(new Double(22), new Integer(120));
+    dataRateHashN.put(new Double(26), new Integer(180));
+    dataRateHashN.put(new Double(30), new Integer(240));
+    dataRateHashN.put(new Double(31), new Integer(270));
+    dataRateHashN.put(new Double(32), new Integer(300));
+  }
+
   public static void main(String[] args) {
     for(int i = 0;i<args.length;i++) {
       System.out.println(args[i]);
@@ -92,7 +112,7 @@ public class MRS{
 //__________________________________________________________________________________________________________
   //x PDA(w, N^in_D, N^out_D, eps)
   // Price-Directive Algorithm
-    double eps = 1.0;
+    double eps = 0.25;
     System.out.println("PDA");
     PDA.run(eps, links, Ins, Outs);
 

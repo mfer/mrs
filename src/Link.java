@@ -16,6 +16,9 @@ public class Link extends Circle{
   double weight;
   double x, y; //auxiliary functions
 
+  int dataRate=1;
+  double beta=1.0;
+
   public Link(double x_sender, double y_sender,
               double x_receiver, double y_receiver,
               double interference_radius){
@@ -32,7 +35,15 @@ public class Link extends Circle{
     this.y_receiver = y_receiver;
 
     length = receiver.distance(sender);
-    this.interference_radius = length*interference_radius;    
+    //this.interference_radius = length*interference_radius;    
+
+//    interference_radius = lmin*Math.pow(beta*4*ALPHA*CIDDD*Math.pow(2,ALPHA)/
+//      ((ALPHA-2)*(Math.pow(raioMinimo/lmin,2))),1.0/(ALPHA-2));
+
+
+//    int indexBeta = (int)Math.floor(Math.random()*8); 
+//    this.beta= dataRateIndexHash[indexBeta];  
+//    dataRate = setDataRate(this.beta);
   }
 
   public Double set_weight(Double value){
@@ -62,10 +73,27 @@ public class Link extends Circle{
     return y;
   }      
 
+  //Return the minimum length given a set of links
+  public static Double get_min_length(ArrayList<Link> links){
+    double min_length = links.get(0).length;
+    for ( Link link : links){
+      if(link.length < min_length) min_length = link.length;
+    }
+    return min_length;
+  }
+
+  //Return the maximum length given a set of links
+  public static Double get_max_length(ArrayList<Link> links){
+    double max_length = links.get(0).length;
+    for ( Link link : links){
+      if(link.length > max_length) max_length = link.length;
+    }
+    return max_length;
+  }
+
   //Return the maximum x given a set of Ins
   public static Double get_max_x(ArrayList<Link> links, ArrayList<ArrayList<Integer>> Ins){
-    double max_x = 0.0;
-    System.out.println("get_max_x");
+    double max_x = links.get(0).x;
     for ( ArrayList<Integer> link : Ins){
       int i = Ins.indexOf(link);
       for ( int j : Ins.get(i)){

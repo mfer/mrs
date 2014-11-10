@@ -180,9 +180,19 @@ public class GrafoRadial {
     this.adj=adj;
   }
 
+  private void set_interference_radius(ArrayList<Link> links){
+    System.out.println("min_length "+Link.get_min_length(links));
+    System.out.println("max_length "+Link.get_max_length(links));
+    double delta_length = Link.get_max_length(links)/Link.get_min_length(links);
+    System.out.println("delta_length "+delta_length);
+  }
+
   //create a special disk graph (DGz) from the links
   public GrafoRadial(ArrayList<Link> links){
     int i,j;
+    
+    //set the interference_radius of the links
+    set_interference_radius(links);
 
     //set the weight of the links
     set_weights(links);
