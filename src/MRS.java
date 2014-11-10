@@ -114,7 +114,7 @@ public class MRS{
 //__________________________________________________________________________________________________________
   //x PDA(w, N^in_D, N^out_D, eps)
   // Price-Directive Algorithm
-    double eps = 1.0;
+    double eps = 0.50;
     System.out.println("PDA");
     PDA.run(eps, links, Ins, Outs);
 /*

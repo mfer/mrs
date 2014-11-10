@@ -52,17 +52,9 @@ public class Link extends Circle{
     return value;
   }
 
-  public Double w(){
-    return weight;
-  }
-
   public Double set_weight_bar(Double value){
     this.weight_bar = value;
     return value;
-  }
-
-  public Double w_bar(){
-    return weight_bar;
   }
 
   public Double set_x(Double value){
@@ -114,7 +106,7 @@ public class Link extends Circle{
     return max_x;
   }
 
-  //Return the id of the first ink that satisfy the x-surplus property
+  //Return the id of the first link that satisfy the x-surplus property
   public static Integer get_x_surplus(ArrayList<Link> links, Set<Integer> B,
                           ArrayList<ArrayList<Integer>> Ins,
                           ArrayList<ArrayList<Integer>> Outs){
