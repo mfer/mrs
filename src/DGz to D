@@ -1,0 +1,33 @@
+-estudar como fazer DGz(L) virar entrada do orientWIS"
+
+DGz(L):
+  vertices = {s1, ... , sn}
+  raios = { z(l1)d11, ..., z(ln)dnn}
+
+  arestas
+  (sv, sw) iff d(sv, sw) < z(lv)dvv + z(lw)dww
+  aresta entre sv e sw , se e somente se a distancia entre sv e sw
+  eh menor q a soma dos raios de interferencia
+
+
+  z(li) = gi * w / dii
+  z(li) >= 0
+
+  w = dmin * zmin
+
+
+
+entrada do orientWIS:
+  grafo de conflito direcionado
+
+---------------------------------------------
+
+  DGz(L) -> vertices sao os transmissores do link
+            arestas representam conflitos
+            dii      = link i length
+            z(li)dii = link i interference radius
+
+  D (orientWIS) -> vertices sao os transmissores do link
+                   arestas representam conflitos
+                   direcao da aresta vai do link do transmissor
+                   para o link do receptor que estao em conflito
