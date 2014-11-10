@@ -68,6 +68,10 @@ public class GrafoRadial {
             g.drawOval((int)(100*links.get(linkIndex).sender.x)-r/2 + shift, 
               (int)(100*links.get(linkIndex).sender.y-r/2 + shift),
               r,r);
+          }else{
+            //g.drawString(""+links.get(0).weight,
+            //  (int)(100*links.get(linkIndex).sender.x)-5 + shift, 
+            //  (int)(100*links.get(linkIndex).sender.y-5 + shift));            
           }
         }       
         
@@ -134,9 +138,13 @@ public class GrafoRadial {
     } 
 
 
-    for(int i = 0;i<links.size();i++) {
-      links.get(i).set_weight( new Double(i) );
-    }
+    links.get(0).set_weight( 4.0 );
+    links.get(1).set_weight( 2.0 );
+    links.get(2).set_weight( 5.0 );
+    links.get(3).set_weight( 8.0 );
+    links.get(4).set_weight( 6.0 );
+    links.get(5).set_weight( 4.0 );
+    links.get(6).set_weight( 3.0 );
   }
 
   private void set_adjacency(ArrayList<Link> links){
@@ -161,13 +169,13 @@ public class GrafoRadial {
           degree[i]++;
           degree[j]++;
 
-          linked.add(new Link(links.get(i).sender.x, links.get(i).sender.y, 
-            links.get(j).sender.x, links.get(j).sender.y, 2.0));          
+          //linked.add(new Link(links.get(i).sender.x, links.get(i).sender.y, 
+          //  links.get(j).sender.x, links.get(j).sender.y, 2.0));
         }
       }      
     }
 
-    draw(linked, false);
+    //draw(linked, false);
 
     this.adj=adj;
   }
@@ -175,6 +183,9 @@ public class GrafoRadial {
   //create a special disk graph (DGz) from the links
   public GrafoRadial(ArrayList<Link> links){
     int i,j;
+
+    //set the weight of the links
+    set_weights(links);
 
     //set adjacency using geometric intersection
     set_adjacency(links);
@@ -191,12 +202,6 @@ public class GrafoRadial {
       System.out.println();
     }
 */
-    //set the weight of the links
-    set_weights(links);
-
-    for(i=0;i<links.size();i++){
-      System.out.println("Link "+i+" weight "+links.get(i).weight);
-    }
-
+     
   }    
 }

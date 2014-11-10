@@ -14,7 +14,7 @@ public class Link extends Circle{
   double length;
   double interference_radius;
   double weight;
-  double x_surplus;
+  double x, y; //auxiliary functions
 
   public Link(double x_sender, double y_sender,
               double x_receiver, double y_receiver,
@@ -45,12 +45,46 @@ public class Link extends Circle{
     return weight;
   }
 
-  public Double set_x_surplus(Double value){
-    this.x_surplus = value;
+  public Double set_x(Double value){
+    this.x = value;
     return value;
   }    
 
-  public Double x_surplus(){
+  public Double x(){
+    return x;
+  }      
+
+  public Double set_y(Double value){
+    this.y = value;
+    return value;
+  }    
+
+  public Double y(){
+    return y;
+  }      
+
+  //Return the maximum x given a set of Ins
+  public static Double get_max_x(ArrayList<Link> links, ArrayList<ArrayList<Integer>> Ins){
+    double max_x = 0.0;
+    System.out.println("get_max_x");
+    for ( int i=0; i< Ins.size(); i++ ){
+      //for ( int j=0; j< Ins.get(i).size(); j++ ){
+        System.out.println("i "+i);
+      //}
+    }
+    return max_x;
+  }
+
+  //Return the id of the first ink that satisfy the x-surplus property
+  public static Integer get_x_surplus(ArrayList<Link> links, Set<Integer> B){
+    int x_surplus = -1;
+    for ( Integer b : B ){      
+      System.out.println("surplus? "+b+" "+links.get(b).x);
+      if ( true ){
+        x_surplus = b;
+        break;
+      }
+    }
     return x_surplus;
   }
 }

@@ -9,14 +9,14 @@ public class MRS{
     }
 
     ArrayList<Link> links = new ArrayList<Link>();
-    links.add(new Link(3.0, 3.0, 3.0, 1.0, 2.0));
-    links.add(new Link(2.0, 1.0, 4.0, 4.0, 2.0));
-    links.add(new Link(0.0, 4.0, 2.0, 2.0, 2.0));
-    links.add(new Link(1.0, 2.0, 4.0, 2.0, 2.0));
-    links.add(new Link(4.0, 1.0, 0.0, 1.0, 2.0));
-    links.add(new Link(2.0, 4.0, 3.0, 2.0, 2.0));
-    links.add(new Link(0.0, 0.0, 1.0, 1.0, 2.0));
-    links.add(new Link(3.0, 0.0, 0.0, 3.0, 2.0));
+    links.add(new Link(2.0, 2.0, 2.5, 1.5, 0.0));
+    links.add(new Link(3.5, 2.0, 3.5, 3.0, 0.0));
+    links.add(new Link(2.5, 1.0, 3.5, 1.5, 0.0));
+    links.add(new Link(0.8, 1.0, 2.0, 0.8, 0.0));
+    links.add(new Link(0.5, 2.0, 0.5, 3.0, 0.0));
+    links.add(new Link(1.5, 3.0, 1.5, 2.5, 0.0));
+    links.add(new Link(2.5, 3.0, 3.5, 2.5, 0.0));
+
 /*    
     System.out.println(links.size());
     for(int i = 0;i<links.size();i++) {
@@ -75,14 +75,14 @@ public class MRS{
   // Price-Directive Algorithm
     double eps = 1.0;
     System.out.println("PDA");
-    Stack<Integer> x = PDA.run(eps);
+    PDA.run(eps, links, Ins, Outs);
 
 
 //__________________________________________________________________________________________________________
   //I PG(w, A, x)
   // Prune-and-Grow algorithm
     System.out.println("PG");
-    System.out.println("I = " + PG.run(x, links));
+    System.out.println("I = " + PG.run(links));
 
 
 //__________________________________________________________________________________________________________

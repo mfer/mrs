@@ -8,29 +8,23 @@ public class PG{
     return true;
   }
 
-  public static Set<Integer> run(Stack<Integer> x, ArrayList<Link> links){
+  public static Set<Integer> run(ArrayList<Link> links){
     int i=0, a;
-    links.get(0).set_weight(0.0);
-    links.get(1).set_weight(1.0);
-    links.get(2).set_weight(2.0);
-    links.get(3).set_weight(3.0);
-    links.get(4).set_weight(4.0);
-    links.get(5).set_weight(5.0);
-    links.get(6).set_weight(6.0);
-    links.get(7).set_weight(7.0);
-
     
     System.out.println("Prune-Phase");
       //B ← A, S ← ∅; //S is a stack
       Set<Integer> B = new TreeSet<Integer>();
-      B.addAll(Arrays.asList(1,2,3,4,5));
+      for (i=0;i<links.size();i++){
+        B.addAll(Arrays.asList(i));
+      }
+      //System.out.println(B);
       Stack<Integer> S = new Stack<Integer>();
       while(!B.isEmpty()){
         //a ← a x-surplus link of B;
-        a = x.pop();
+        a = Link.get_x_surplus(links, B);
         //B ← B ∖ {a};
         B.removeAll(Arrays.asList(a));
-        //w(a) ← w (a) − w (S ∩ N (a));
+        //w_bar(a) ← w (a) − w_bar (S ∩ N (a));
         int b = 0;
 
         //System.out.println("setting "+a);
