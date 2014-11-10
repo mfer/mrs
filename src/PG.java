@@ -8,8 +8,11 @@ public class PG{
     return true;
   }
 
-  public static Set<Integer> run(ArrayList<Link> links){
+  public static Set<Integer> run(double eps, ArrayList<Link> links,
+                          ArrayList<ArrayList<Integer>> Ins,
+                          ArrayList<ArrayList<Integer>> Outs){
     int i=0, a;
+
     
     System.out.println("Prune-Phase");
       //B ← A, S ← ∅; //S is a stack
@@ -20,15 +23,45 @@ public class PG{
       //System.out.println(B);
       Stack<Integer> S = new Stack<Integer>();
       while(!B.isEmpty()){
-        //a ← a x-surplus link of B;
-        a = Link.get_x_surplus(links, B);
+        System.out.println("=================================");
+        System.out.println(B);
+
+        //a ← a x-surplus link of B;                
+        a = Link.get_x_surplus(links, B, Ins, Outs);
+
+/*        
+        if (B.size()==1){
+          Iterator<Integer> it = B.iterator();
+          Integer current = 0;
+          while(it.hasNext() ) {
+            a = it.next();
+          }
+        }else{
+          PDA.run(eps, links, Ins, Outs);
+
+          for(Link link : links){
+            System.out.println("x("+links.indexOf(link)+")= "+link.x);
+          }
+        }
+*/
+
         //B ← B ∖ {a};
         B.removeAll(Arrays.asList(a));
-        //w_bar(a) ← w (a) − w_bar (S ∩ N (a));
-        int b = 0;
 
-        //System.out.println("setting "+a);
-        links.get(a).set_weight(links.get(a).w() - links.get(b).w());
+        //w_bar(a) ← w (a) − w_bar (S ∩ N (a));
+        double sum_weight_bar = 0.0;
+        for(int adj : Outs.get(a)){
+          if(S.search(adj)>0){
+            sum_weight_bar = sum_weight_bar + links.get(adj).weight_bar;
+          }
+        }
+        for(int adj : Ins.get(a)){ 
+          if(S.search(adj)>0){
+            sum_weight_bar = sum_weight_bar + links.get(adj).weight_bar;
+          }
+        }
+        links.get(a).set_weight_bar(links.get(a).weight - sum_weight_bar);
+
         //if w(a) > 0, push a onto S;
         if(links.get(a).w() > 0.0) S.push(new Integer(a));
         i++;

@@ -14,6 +14,7 @@ public class Link extends Circle{
   double length;
   double interference_radius;
   double weight;
+  double weight_bar;
   double x, y; //auxiliary functions
 
   int dataRate=1;
@@ -53,6 +54,15 @@ public class Link extends Circle{
 
   public Double w(){
     return weight;
+  }
+
+  public Double set_weight_bar(Double value){
+    this.weight_bar = value;
+    return value;
+  }
+
+  public Double w_bar(){
+    return weight_bar;
   }
 
   public Double set_x(Double value){
@@ -105,15 +115,42 @@ public class Link extends Circle{
   }
 
   //Return the id of the first ink that satisfy the x-surplus property
-  public static Integer get_x_surplus(ArrayList<Link> links, Set<Integer> B){
+  public static Integer get_x_surplus(ArrayList<Link> links, Set<Integer> B,
+                          ArrayList<ArrayList<Integer>> Ins,
+                          ArrayList<ArrayList<Integer>> Outs){
+
     int x_surplus = -1;
-    for ( Integer b : B ){      
-      System.out.println("surplus? "+b+" "+links.get(b).x);
-      if ( true ){
-        x_surplus = b;
-        break;
+
+    for(Link link : links){
+      int a = links.indexOf(link);
+
+      double xNinD = 0.0;
+      for(int adj : Ins.get(a)){ 
+        xNinD = xNinD + links.get(adj).x;
       }
+      //System.out.print("x(NinD["+links.indexOf(link)+"])= "+xNinD);
+
+      double xNoutD = 0.0;
+      for(int adj : Outs.get(a)){ 
+        xNoutD = xNoutD + links.get(adj).x;
+      }
+      //System.out.println(" x(NoutD["+links.indexOf(link)+"])= "+xNoutD);
+
+
+
+      if(xNinD >= xNoutD){
+        //System.out.println("x-surplus link of A= "+a);
+
+        if(B.contains(a)){
+          //System.out.println("x-surplus link of B= "+a);
+          x_surplus = a;
+          break;
+        }
+
+      }
+
     }
+
     return x_surplus;
   }
 }

@@ -19,25 +19,27 @@ public class PDA{
     //while max a∈A x (N in D [a] ≥ (1 + ε) τ ) do
     while( Link.get_max_x(links,Ins) >= (1+eps)*tau ){
       System.out.println("Iteration: "+iteration); iteration++;
-      System.out.println(Link.get_max_x(links,Ins));
+      System.out.println("  "+Link.get_max_x(links,Ins)+" >= "+(1+eps)*tau);
 
       //a ← arg min a∈A y ( N out D [a] ) / w(a);
       a = get_min(links,Outs);
-      System.out.println("a= "+a);
+      System.out.println("  a= "+a);
       
       //τ ← τ + y (N out D [a]) / y(A);
       tau = tau + yNoutD(a,links,Outs)/yA(links);
-      System.out.println("yNoutD= "+yNoutD(a,links,Outs)+" yA= "+yA(links)+" tau= "+tau);
+      System.out.println("  yNoutD= "+yNoutD(a,links,Outs)+" yA= "+yA(links)+" tau= "+tau);
 
       
       //x (a) ← x (a) + 1;
       double x = links.get(a).x;
       links.get(a).set_x(x + 1);
 
-      System.out.println("x("+a+")= "+links.get(a).x);
+      System.out.println("  x("+a+")= "+links.get(a).x);
       
       //∀b ∈ N out D[a], y(b) ← (1 + ε) y (b) ;
       update_y(links, Outs, a, eps);
+
+      //if(iteration==200) System.exit(0);
       
     }
   }
@@ -50,8 +52,8 @@ public class PDA{
 
     for(int i=0; i<links.size();i++){
       double yprice = yNoutD(i,links,Outs)/links.get(i).weight;
-      System.out.println("i= "+i+" yNoutD= "+yNoutD(i,links,Outs)+" w= "+links.get(i).weight);
-      System.out.println("  yprice= "+yprice);
+      //System.out.println("i= "+i+" yNoutD= "+yNoutD(i,links,Outs)+" w= "+links.get(i).weight);
+      //System.out.println("  yprice= "+yprice);
       if(yprice < argmin){
         argmin = yprice;
         a = i;
@@ -89,11 +91,11 @@ public class PDA{
 
       double y = links.get(a).y;
       links.get(a).set_y(y*(1+eps));
-      //System.out.println("y("+a+")= "+links.get(a).y);
+      System.out.println("    y("+a+")= "+links.get(a).y);
 
       for(int i = 0; i < Outs.get(a).size(); i++){
         links.get(i).set_y(links.get(i).y*(1+eps));
-        //System.out.println("y("+Outs.get(a).get(i)+")= "+links.get(i).y);
+        System.out.println("    y("+Outs.get(a).get(i)+")= "+links.get(i).y);
       }
   }
 }
