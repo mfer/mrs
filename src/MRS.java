@@ -29,6 +29,8 @@ public class MRS{
     }
 
     ArrayList<Link> links = new ArrayList<Link>();
+
+
     links.add(new Link(2.0, 2.0, 2.5, 1.5, 1.0));
     links.add(new Link(3.5, 2.0, 3.5, 3.0, 1.0));
     links.add(new Link(2.5, 1.0, 3.5, 1.5, 1.0));
@@ -36,6 +38,16 @@ public class MRS{
     links.add(new Link(0.5, 2.0, 0.5, 3.0, 1.0));
     links.add(new Link(1.5, 3.0, 1.5, 2.5, 1.0));
     links.add(new Link(2.5, 3.0, 3.5, 2.5, 1.0));
+/*
+    links.add(new Link(2.0, 0.0, 2.0, 1.5, 1.0));
+    links.add(new Link(0.0, 1.0, 1.5, 0.5, 1.0));
+    links.add(new Link(4.0, 1.0, 3.0, 0.5, 1.0));
+    links.add(new Link(2.0, 2.0, 3.0, 1.2, 1.0));
+    links.add(new Link(0.0, 3.0, 0.5, 1.5, 1.0));
+    links.add(new Link(4.0, 3.0, 3.2, 3.8, 1.0));
+    links.add(new Link(1.0, 4.0, 1.5, 3.1, 1.0));
+    links.add(new Link(3.0, 4.0, 2.5, 3.1, 1.0));
+*/
 
 /*    
     System.out.println(links.size());
@@ -114,7 +126,7 @@ public class MRS{
 //__________________________________________________________________________________________________________
   //x PDA(w, N^in_D, N^out_D, eps)
   // Price-Directive Algorithm
-    double eps = 0.50;
+    double eps = 0.15;
     System.out.println("PDA");
     PDA.run(eps, links, Ins, Outs);
 /*
@@ -137,31 +149,11 @@ public class MRS{
     }
 */
 /*
-    System.out.println("Outs");
-    for(ArrayList<Integer> link : Outs){
-      int linkIndex = Outs.indexOf(link);
-      double sum = links.get(linkIndex).x;
-      System.out.println("x("+linkIndex+")= "+links.get(linkIndex).x);
-      for(int adj : link){
-        System.out.println("x("+adj+")= "+links.get(adj).x);
-        sum = sum + links.get(adj).x;
-      }
-      System.out.println("x(NoutD["+linkIndex+"])= "+sum);
-    }
-
-    System.out.println("Ins");
-    for(ArrayList<Integer> link : Ins){
-      int linkIndex = Ins.indexOf(link);
-      double sum = links.get(linkIndex).x;
-      System.out.println("x("+linkIndex+")= "+links.get(linkIndex).x);
-      for(int adj : link){
-        System.out.println("x("+adj+")= "+links.get(adj).x);
-        sum = sum + links.get(adj).x;
-      }
-      System.out.println("x(NinD["+linkIndex+"])= "+sum);
+    for(Link link : links){
+      int a = links.indexOf(link);
+      System.out.println("x("+a+")= "+link.x);
     }
 */
-
 //__________________________________________________________________________________________________________
   //I PG(w, A, x)
   // Prune-and-Grow algorithm

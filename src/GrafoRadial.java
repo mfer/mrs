@@ -138,13 +138,13 @@ public class GrafoRadial {
     } 
 
 
-    links.get(0).set_weight( 4.0 );
-    links.get(1).set_weight( 2.0 );
-    links.get(2).set_weight( 5.0 );
-    links.get(3).set_weight( 8.0 );
-    links.get(4).set_weight( 6.0 );
-    links.get(5).set_weight( 4.0 );
-    links.get(6).set_weight( 3.0 );
+    links.get(0).set_weight( 1.0 );
+    links.get(1).set_weight( 1.0 );
+    links.get(2).set_weight( 1.0 );
+    links.get(3).set_weight( 1.0 );
+    links.get(4).set_weight( 1.0 );
+    links.get(5).set_weight( 1.0 );
+    links.get(6).set_weight( 1.0 );
   }
 
   private void set_adjacency(ArrayList<Link> links){
@@ -153,7 +153,7 @@ public class GrafoRadial {
     int adj[][] = new int[links.size()][links.size()];
     ArrayList<Link> linked = new ArrayList<Link>();
 
-    //draw(links, true);
+    draw(links, true);
 
     for(i=0;i<links.size();i++){
       degree[i]=0;

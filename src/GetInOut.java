@@ -14,15 +14,17 @@ public class GetInOut{
     Outs.clear();
 
     for(int i = 0; i < D.links.size(); i++){
-      Outs.add( new ArrayList<Integer>() );
+      Ins.add( new ArrayList<Integer>() );
     }
 
     for(Link link : D.links){
       int linkIndex = D.links.indexOf(link);
-      Ins.add(D.adjacencia.get(linkIndex));
-      for(int out : Ins.get(linkIndex)){
+      //System.out.println("OUT: adding "+D.adjacencia.get(linkIndex)+" to "+linkIndex);
+      Outs.add(D.adjacencia.get(linkIndex));
+      for(int out : Outs.get(linkIndex)){
         //in neighbors of A are out neighbors of other links
-        Outs.get(out).add(linkIndex);
+        //System.out.println("IN: adding "+linkIndex+" to "+out);
+        Ins.get(out).add(linkIndex);
       }
     }
   }

@@ -3,6 +3,9 @@ import java.lang.Math;
 
 public class Link extends Circle{
 
+  public static int nlinks=0;
+  int id;
+
   Point sender;
   Point receiver;
 
@@ -24,6 +27,9 @@ public class Link extends Circle{
               double x_receiver, double y_receiver,
               double interference_radius){
 
+    id=nlinks;
+    nlinks++;
+
     sender = new Point(x_sender, y_sender);
     receiver = new Point(x_receiver, y_receiver);
 
@@ -36,7 +42,7 @@ public class Link extends Circle{
     this.y_receiver = y_receiver;
 
     length = receiver.distance(sender);
-    //this.interference_radius = length*interference_radius;    
+    this.interference_radius = length*interference_radius;    
 
 //    interference_radius = lmin*Math.pow(beta*4*ALPHA*CIDDD*Math.pow(2,ALPHA)/
 //      ((ALPHA-2)*(Math.pow(raioMinimo/lmin,2))),1.0/(ALPHA-2));
@@ -91,19 +97,6 @@ public class Link extends Circle{
       if(link.length > max_length) max_length = link.length;
     }
     return max_length;
-  }
-
-  //Return the maximum x given a set of Ins
-  public static Double get_max_x(ArrayList<Link> links, ArrayList<ArrayList<Integer>> Ins){
-    double max_x = links.get(0).x;
-    for ( ArrayList<Integer> link : Ins){
-      int i = Ins.indexOf(link);
-      for ( int j : Ins.get(i)){
-        //System.out.println("i "+i+" j "+j+" x="+links.get(j).x);
-        if(max_x < links.get(j).x) max_x = links.get(j).x;
-      }
-    }
-    return max_x;
   }
 
   //Return the id of the first link that satisfy the x-surplus property
