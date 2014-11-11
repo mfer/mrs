@@ -25,16 +25,18 @@ public class Orientate{
     for(Link link : G.links){
       //for each adjacent M of N
       D.links.add(link);
-      int linkIndex = G.links.indexOf(link);      
+      int linkIndex = G.links.indexOf(link);
       for(Integer adj : G.adjacencia.get(linkIndex)){
         Link adjacente = G.links.get(adj);
         //System.out.print(linkIndex+" "+adj+" ");
-        if(adjacente.interference_radius >= 
+        if(adjacente.interference_radius >=
             link.receiver.distance(adjacente.sender)){
           // Direcao D de adjacente para link
-          D.adjacencia.get(adj).add(linkIndex);          
+          D.adjacencia.get(adj).add(linkIndex);
           //System.out.print("out");
-        }else{//estah em conflito, se a direcao nao eh b-->a, entao...
+        }else if(link.interference_radius >=
+            adjacente.receiver.distance(link.sender)){
+            //verifica a-->b, ja que a direcao nao eh b-->a
           D.adjacencia.get(linkIndex).add(adj);
           //System.out.print("in");
         }
