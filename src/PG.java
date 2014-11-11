@@ -30,7 +30,7 @@ public class PG{
     ArrayList<ArrayList<Integer>> B_Outs = new ArrayList<ArrayList<Integer>>(Outs);
 
    
-    System.out.println("  Prune-Phase");
+    //System.out.println("  Prune-Phase");
       //B ← A, S ← ∅; //S is a stack
       Set<Integer> B = new TreeSet<Integer>();
       for (i=0;i<links.size();i++){
@@ -94,22 +94,22 @@ public class PG{
 
       }
 
-    System.out.println("  Grow-Phase");
+    //System.out.println("  Grow-Phase");
       //I ← ∅;
       Set<Integer> I = new TreeSet<Integer>();
 
-                  Stack<Integer> S_reverse = new Stack<Integer>();
-                  while (!S.empty()) {
-                    S_reverse.push(S.pop());
-                  }
+                  //Stack<Integer> S_reverse = new Stack<Integer>();
+                  //while (!S.empty()) {
+                  //  S_reverse.push(S.pop());
+                  //}
                   //System.out.println(S_reverse);
                   //System.out.println(S);
 
       //while S ∕= ∅,
-      while(!S_reverse.empty()){
+      while(!S.empty()){
         //System.out.println("=================================");
         //pop the top link a from S; 
-        a = S_reverse.pop();
+        a = S.pop();
         //System.out.println("pop "+a);
 
         //if I ∪ {a} is independent, I ← I ∪ {a};
@@ -119,7 +119,7 @@ public class PG{
         union.addAll(I);
         union.addAll(Sa);
 
-        //System.out.println("set_candidate: "+union);
+        System.out.println("set_candidate: "+union);
         if(IS(union, G)) {
           I.clear();
           I.addAll(union);

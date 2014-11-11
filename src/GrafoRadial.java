@@ -153,7 +153,7 @@ public class GrafoRadial {
     int adj[][] = new int[links.size()][links.size()];
     ArrayList<Link> linked = new ArrayList<Link>();
 
-    //draw(links, true);
+    draw(links, true);
 
     for(i=0;i<links.size();i++){
       degree[i]=0;
@@ -162,20 +162,20 @@ public class GrafoRadial {
     for(i=0;i<links.size();i++){      
       for(j=i+1;j<links.size();j++){
         if( links.get(i).intersects(links.get(j)) ){
-          //System.out.println("  i: " + i + "  j: " + j);          
+          System.out.println(i + " " + j);          
           adj[i][j]=1;
           adj[j][i]=1;
 
           degree[i]++;
           degree[j]++;
 
-          //linked.add(new Link(links.get(i).sender.x, links.get(i).sender.y, 
-          //  links.get(j).sender.x, links.get(j).sender.y, 2.0));
+          linked.add(new Link(links.get(i).sender.x, links.get(i).sender.y, 
+            links.get(j).sender.x, links.get(j).sender.y, 2.0));
         }
       }      
     }
 
-    //draw(linked, false);
+    draw(linked, false);
 
     this.adj=adj;
   }
