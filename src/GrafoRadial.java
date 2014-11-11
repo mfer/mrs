@@ -153,7 +153,7 @@ public class GrafoRadial {
     int adj[][] = new int[links.size()][links.size()];
     ArrayList<Link> linked = new ArrayList<Link>();
 
-    draw(links, true);
+    //draw(links, true);
 
     for(i=0;i<links.size();i++){
       degree[i]=0;

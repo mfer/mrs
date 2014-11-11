@@ -10,7 +10,7 @@ public class PG{
     for(int a : C){
       for(int b : C){
         if(b>a){
-          System.out.println(a+" "+b);
+          //System.out.println(a+" "+b);
           //System.out.println(" adj:"+G.adjacencia.get(a).contains(b));
           if(G.adjacencia.get(a).contains(b)) return false;
         }
@@ -18,22 +18,6 @@ public class PG{
     }
     return true;
   }
-/*  
-    static boolean isIndependentSet(int adj[][],ArrayList<Integer> solution){
-
-        int i,j;
-        int nelements=solution.size();
-
-        for(i=0;i<nelements;i++){
-            for(j=i+1;j<nelements;j++){
-              if((adj[solution.get(i)][solution.get(j)]>0)||
-              (adj[solution.get(j)][solution.get(i)]>0)) return false;
-            }
-        }
-
-        return true;
-    }
-*/
 
   public static Set<Integer> run(double eps, ArrayList<Link> links,
                           ArrayList<ArrayList<Integer>> Ins,
@@ -46,30 +30,14 @@ public class PG{
     ArrayList<ArrayList<Integer>> B_Outs = new ArrayList<ArrayList<Integer>>(Outs);
 
    
-    System.out.println("Prune-Phase");
+    System.out.println("  Prune-Phase");
       //B ← A, S ← ∅; //S is a stack
       Set<Integer> B = new TreeSet<Integer>();
       for (i=0;i<links.size();i++){
         B.addAll(Arrays.asList(links.get(i).id));
       }
 
-          System.out.println("Outs");
-          for(ArrayList<Integer> link : Outs){
-            int linkIndex = Outs.indexOf(link);
-            for(int adj : link){
-              System.out.println(linkIndex+" --> "+adj);
-            }
-          }
-
-          System.out.println("Ins");
-          for(ArrayList<Integer> link : Ins){
-            int linkIndex = Ins.indexOf(link);
-            for(int adj : link){
-              System.out.println(linkIndex+" <-- "+adj);
-            }
-          }
-      
-      Stack<Integer> S = new Stack<Integer>();
+    Stack<Integer> S = new Stack<Integer>();
       while(!B.isEmpty()){
         //System.out.println("=================================");
 
@@ -126,7 +94,7 @@ public class PG{
 
       }
 
-    System.out.println("Grow-Phase");
+    System.out.println("  Grow-Phase");
       //I ← ∅;
       Set<Integer> I = new TreeSet<Integer>();
 
@@ -134,15 +102,15 @@ public class PG{
                   while (!S.empty()) {
                     S_reverse.push(S.pop());
                   }
-                  System.out.println(S_reverse);
-                  System.out.println(S);
+                  //System.out.println(S_reverse);
+                  //System.out.println(S);
 
       //while S ∕= ∅,
       while(!S_reverse.empty()){
-        System.out.println("=================================");
+        //System.out.println("=================================");
         //pop the top link a from S; 
         a = S_reverse.pop();
-        System.out.println("pop "+a);
+        //System.out.println("pop "+a);
 
         //if I ∪ {a} is independent, I ← I ∪ {a};
         Set<Integer> Sa = new TreeSet<Integer>();
@@ -151,7 +119,7 @@ public class PG{
         union.addAll(I);
         union.addAll(Sa);
 
-        System.out.println("set_candidate: "+union);
+        //System.out.println("set_candidate: "+union);
         if(IS(union, G)) {
           I.clear();
           I.addAll(union);

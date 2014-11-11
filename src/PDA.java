@@ -43,10 +43,10 @@ public class PDA{
       //if(iteration==200) System.exit(0);      
     }
 
-    for(Link link : links){
-      System.out.println("x("+links.indexOf(link)+")= "+link.x);
-    }
-    System.out.println("Iterations= "+iteration);
+//    for(Link link : links){
+//      System.out.println("x("+links.indexOf(link)+")= "+link.x);
+//    }
+//    System.out.println("Iterations= "+iteration);
   }
 
   private static double get_max_x(ArrayList<Link> links,
