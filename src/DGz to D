@@ -31,3 +31,6 @@ entrada do orientWIS:
                    arestas representam conflitos
                    direcao da aresta vai do link do transmissor
                    para o link do receptor que estao em conflito
+
+                   em cada aresta eh necessario checar se algum receptor
+                   esta de fato dentro do raio de interferencia do outro link
