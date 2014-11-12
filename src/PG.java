@@ -30,7 +30,7 @@ public class PG{
     ArrayList<ArrayList<Integer>> B_Outs = new ArrayList<ArrayList<Integer>>(Outs);
 
    
-    System.out.println("  Prune-Phase");
+    //System.out.println("  Prune-Phase");
       //B ← A, S ← ∅; //S is a stack
       Set<Integer> B = new TreeSet<Integer>();
       for (i=0;i<links.size();i++){
@@ -74,18 +74,21 @@ public class PG{
           //**************************************************************************
 
 
-        //w_bar(a) ← w (a) − w_bar (S ∩ N (a));
+        
         double sum_weight_bar = 0.0;
         for(int adj : Outs.get(a)){
+          //System.out.println("outs_adj: "+adj);
           if(S.search(adj)>0){
             sum_weight_bar = sum_weight_bar + links.get(adj).weight_bar;
           }
         }
         for(int adj : Ins.get(a)){ 
+          //System.out.println(" ins_adj: "+adj);
           if(S.search(adj)>0){
             sum_weight_bar = sum_weight_bar + links.get(adj).weight_bar;
           }
         }
+        //w_bar(a) ← w (a) − w_bar (S ∩ N (a));        
         links.get(a).set_weight_bar(links.get(a).weight - sum_weight_bar);
 
         //if w(a) > 0, push a onto S;
@@ -94,7 +97,7 @@ public class PG{
 
       }
 
-    System.out.println("  Grow-Phase");
+    //System.out.println("  Grow-Phase");
       //I ← ∅;
       Set<Integer> I = new TreeSet<Integer>();
 
@@ -102,7 +105,7 @@ public class PG{
                   while (!S.empty()) {
                     S_reverse.push(S.pop());
                   }
-                  //System.out.println(S_reverse);
+                  System.out.println(S_reverse);
                   //System.out.println(S);
 
       //while S ∕= ∅,

@@ -3,8 +3,6 @@ import java.lang.Double;
 
 public class PDA{
 
-
-
   public static void run(double eps, ArrayList<Link> links,
                           ArrayList<ArrayList<Integer>> Ins,
                           ArrayList<ArrayList<Integer>> Outs){
@@ -34,13 +32,10 @@ public class PDA{
       //x (a) ← x (a) + 1;
       double x = links.get(a).x;
       links.get(a).set_x(x + 1);
-
-//      System.out.println("  x("+a+")= "+links.get(a).x);
       
       //∀b ∈ N out D[a], y(b) ← (1 + ε) y (b) ;
       update_y(links, Outs, a, eps);
 
-      //if(iteration==200) System.exit(0);      
     }
 
 //    for(Link link : links){

@@ -18,15 +18,17 @@ public class Simulation{
     }
 
     Grafo G = InstanceReader.readInstance(args[0]);
-
-    GrafoRadial.draw(G.links, true);
+    //GrafoRadial.draw(G.links, true);
 
     Grafo D = Orientate.edge(G);
+
     ArrayList<ArrayList<Integer>> Ins = new ArrayList<ArrayList<Integer>>();
     ArrayList<ArrayList<Integer>> Outs = new ArrayList<ArrayList<Integer>>();
     GetInOut.getInOut(D, Ins, Outs);
+
     double eps = 0.15;
     PDA.run(eps, G.links, Ins, Outs);
+
     System.out.println("I = " + PG.run(eps, G.links, Ins, Outs, G));
   }
 }

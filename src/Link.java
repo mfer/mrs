@@ -43,6 +43,7 @@ public class Link extends Circle{
 
     length = receiver.distance(sender);
     this.interference_radius = length*interference_radius;    
+    weight = 1.0;    
 
 //    interference_radius = lmin*Math.pow(beta*4*ALPHA*CIDDD*Math.pow(2,ALPHA)/
 //      ((ALPHA-2)*(Math.pow(raioMinimo/lmin,2))),1.0/(ALPHA-2));

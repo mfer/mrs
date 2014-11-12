@@ -14,8 +14,11 @@ classes: $(CLASSES:.java=.class)
 run: default
 	java MRS
 
-simulation: default
+simulation_generate: default
 	python gerador.py $(FILENAME) $(nLinks) $(minLength) $(maxLength) $(minZ) $(maxZ) $(escala)
+	java Simulation $(FILENAME)
+
+simulation: default
 	java Simulation $(FILENAME)
 
 clean:

@@ -93,7 +93,7 @@ public class MRS{
     for(ArrayList<Integer> link : D.adjacencia){
       int linkIndex = D.adjacencia.indexOf(link);
       for(int adj : link){
-        System.out.println(linkIndex+" <-- "+adj);
+        System.out.println(linkIndex+" -- "+adj);
       }
     }
 */
