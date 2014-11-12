@@ -1,0 +1,68 @@
+\documentclass[conference]{IEEEtran}
+\hyphenation{op-tical net-works}
+\begin{document}
+  \title{Introduction to Approximation Algorithms - 2014/2 \\ Practical Project Proposal}
+  \author{
+    \IEEEauthorblockN{Flavio Haueisen {\it and} Manasses Ferreira}
+    \IEEEauthorblockA{Computer Science Department UFMG\\ 
+      Belo Horizonte, Minas Gerais, Brasil\\
+      Email: \{haueisen, mfer\}@dcc.ufmg.br}
+  }
+  \maketitle
+  \begin{abstract}
+    The main objective of this Practical Project is to extend and validate 
+    the propositions of the Seminar chosen paper. The extension proposed
+    is to solve other problem with the approximation algorithm studied and
+    the validation will be obtained through simulations on both best and worst case scenarios.
+  \end{abstract}
+  \section{Introduction}
+    The chosen paper \cite{pengjun:2014} solves the Maximum-Weighted Independent Set of Links Problem ({\bf MWIS})
+    using algorithms designed under the {\it protocol} interference model. 
+    In general, a protocol interference model specifies a pairwise conflict relations among all links.
+    A subset is independent if all links are pairwise conflict-free.
+    This paper describes several algorithms, we are interested in the orientation one named {\bf OrientWIS}.
+
+    There is a related work on Wireless Communications \cite{olga:2012} in which the authors made a proof (Theorem 4.5) that 
+    any algorithm to solve {\bf MWIS} is a constant approximation for the Multi-Rate Scheduling Problem ({\bf MRS}).
+
+    So, our proposed contributions are:
+    \begin{enumerate} 
+      \item obtains a constant approximation algorithm to {\bf MRS}
+      \item implements {\bf OrientWIS}
+      \item simulates both best and worst case scenarios
+    \end{enumerate}
+  \section{Practical Project Tasks}
+    This project is divided in two parts: analytical and experimental.
+  \subsection{Analytical}
+    Into this part, 
+    the main task will be map the {\bf MRS} \cite{olga:2012} 
+    into a kind of input to the {{\bf OrientWIS} described at \cite{pengjun:2014}.
+    This map must preserve the approximation guarantees.
+  \subsection{Experimental}
+    Simulations will be used to validate {\bf OrientWIS} in best and worst case scenarios.
+    The instances used by simulations for best and worst case scenarios will be manually crafted
+    based on the nature of the {\bf OrientWIS} algorithm.
+    The implementation code will be available at github \cite{mfer:gitMRS}.
+  \newpage
+  \section{Equations}
+
+  $2(1+\epsilon)\alpha^{in}_{D}$
+
+  \begin{thebibliography}{1}
+    \bibitem{olga:2012}
+      Olga Goussevskaia et al, 
+      \emph{Wireless Multi-Rate Scheduling: From Physical Interference to Disk Graphs}, 
+      3rd~ed.\hskip 1em plus 0.5em minus 0.4em\relax 
+      Harlow, England: Addison-Wesley, 1999.
+    \bibitem{pengjun:2014}
+      Peng-Jun Wan et al, 
+      \emph{Fast and Simple Approximation Algorithms for Maximum Weighted Independet Set of Links}, 
+      IEEE INFOCOM 2014 - \hskip 1em plus 0.5em minus 0.4em\relax 
+      IEEE Conference on Computer Communications.
+    \bibitem{mfer:gitMRS}
+      Flavio Haueisen {\it and} Manasses Ferreira,
+      \emph{Multi-Rate Scheduling source-code},
+      GitHub Repository,
+      https://github.com/mfer/mrs.git
+  \end{thebibliography}
+\end{document}
