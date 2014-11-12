@@ -71,10 +71,14 @@ for i in range(n):
     output.write(("%.3f" % round(x_sender,3))+' ')
     output.write(("%.3f" % round(y_sender,3))+' ')
     output.write(("%.3f" % round(x_receiver,3))+' ')
-    output.write(("%.3f" % round(x_receiver,3))+' ')
+    output.write(("%.3f" % round(y_receiver,3))+' ')
     output.write(("%.3f" % round(z,3))+'\n')
 
-    link = (x_sender,y_sender,x_receiver,y_receiver,z*(minLength + length))
+    dx = x_sender - x_receiver
+    dy = y_sender - y_receiver
+    dist = math.sqrt(dx*dx + dy*dy)
+
+    link = (x_sender,y_sender,x_receiver,y_receiver,z*dist)
     links.append(link)
 #
 #arestas
