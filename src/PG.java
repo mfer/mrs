@@ -105,7 +105,7 @@ public class PG{
                   while (!S.empty()) {
                     S_reverse.push(S.pop());
                   }
-                  System.out.println(S_reverse);
+                  //System.out.println(S_reverse);
                   //System.out.println(S);
 
       //while S ∕= ∅,
