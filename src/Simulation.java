@@ -7,6 +7,7 @@ import java.util.*;
 
 public class Simulation {
   private static Set<Integer> run(String[] args, double eps)  throws FileNotFoundException, IOException{
+    Link.nlinks=0;
     Grafo G = InstanceReader.readInstance(args[0]);
     //GrafoRadial.draw(G.links, true);
     Grafo D = Orientate.edge(G);
