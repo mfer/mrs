@@ -30,13 +30,13 @@ JFLAGS=-classpath $(CLASSPATH)
 	echo $*
 	cd $(BASE)$(BINDIR) && $(JAVA) $(JFLAGS) $(subst /,.,$*) $(FILENAME)
 
-random:
+simulation:
 	python gerador.py ./instances/$(FILENAME) $(nLinks) $(minLength) $(maxLength) $(minZ) $(maxZ) $(escala)
 	$(eval BASE=$(dir $<))
 	rm -rf $(BASE)$(BINDIR) && mkdir $(BASE)$(BINDIR)
 	$(JAVAC) $(JCFLAGS) Simulation.java
 	cd $(BASE)$(BINDIR) && $(JAVA) $(JFLAGS) Simulation ../instances/$(FILENAME)
-	
+
 
 %.jar: %.class
 	-mkdir -p $(JARDIR)
