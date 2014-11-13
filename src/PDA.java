@@ -13,26 +13,26 @@ public class PDA{
       links.get(a).set_y(1.0);
     }
     double tau = 0.0;
-    
+
     //while max a∈A x (N in D [a] ≥ (1 + ε) τ ) do
     while( get_max_x(links,Ins) >= (1+eps)*tau ){
       iteration++;
-//      System.out.println("Iteration: "+iteration); 
+//      System.out.println("Iteration: "+iteration);
 //      System.out.println("  "+get_max_x(links,Ins)+" >= "+(1+eps)*tau);
 
       //a ← arg min a∈A y ( N out D [a] ) / w(a);
       a = get_min(links,Outs);
 //      System.out.println("  a= "+a);
-      
+
       //τ ← τ + y (N out D [a]) / y(A);
       tau = tau + yNoutD(a,links,Outs)/yA(links);
 //      System.out.println("  yNoutD= "+yNoutD(a,links,Outs)+" yA= "+yA(links)+" tau= "+tau);
 
-      
+
       //x (a) ← x (a) + 1;
       double x = links.get(a).x;
       links.get(a).set_x(x + 1);
-      
+
       //∀b ∈ N out D[a], y(b) ← (1 + ε) y (b) ;
       update_y(links, Outs, a, eps);
 
@@ -47,7 +47,7 @@ public class PDA{
   private static double get_max_x(ArrayList<Link> links,
                        ArrayList<ArrayList<Integer>> Ins){
     int a = 0;
-    double argmax = xNinD(0,links,Ins);    
+    double argmax = xNinD(0,links,Ins);
 
     for(int i=1; i<links.size();i++){
       double xSum = xNinD(links.get(i).id,links,Ins);
@@ -55,7 +55,7 @@ public class PDA{
         argmax = xSum;
       }
     }
-    return argmax;    
+    return argmax;
   }
 
   public static double xNinD(int a, ArrayList<Link> links,
@@ -74,7 +74,7 @@ public class PDA{
                        ArrayList<ArrayList<Integer>> Outs){
     int a = links.get(0).id;
     double argmin = yNoutD(a,links,Outs)/links.get(a).weight;
-    
+
 
     for(int i=1; i<links.size();i++){
       int b = links.get(i).id;
@@ -124,10 +124,10 @@ public class PDA{
         int b = links.get(i).id;
         links.get(b).set_y(links.get(b).y*(1+eps));
         //System.out.println("    y("+Outs.get(a).get(b)+")= "+links.get(b).y);
-      }      
+      }
       //System.out.println();
       //**************************************************************************
       // TODO: understand it is right the y goes to infinity...
-      //**************************************************************************      
+      //**************************************************************************
   }
 }

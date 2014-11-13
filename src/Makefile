@@ -17,7 +17,7 @@ ifneq (,$(wildcard $(jars)/*))
 endif
 
 # Flags de compilação
-JCFLAGS=-g -d $(BASE)$(BINDIR) -classpath $(CLASSPATH)
+JCFLAGS=-Xdiags:verbose -g -d $(BASE)$(BINDIR) -classpath $(CLASSPATH)
 # Flags de execução
 JFLAGS=-classpath $(CLASSPATH)
 
@@ -31,11 +31,9 @@ JFLAGS=-classpath $(CLASSPATH)
 	cd $(BASE)$(BINDIR) && $(JAVA) $(JFLAGS) $(subst /,.,$*) $(FILENAME)
 
 simulation:
-	python gerador.py ./instances/$(FILENAME) $(nLinks) $(minLength) $(maxLength) $(minZ) $(maxZ) $(escala)
-	$(eval BASE=$(dir $<))
-	rm -rf $(BASE)$(BINDIR) && mkdir $(BASE)$(BINDIR)
+	#python gerador.py ./instances/$(FILENAME) $(nLinks) $(minLength) $(maxLength) $(minZ) $(maxZ) $(escala)
 	$(JAVAC) $(JCFLAGS) Simulation.java
-	cd $(BASE)$(BINDIR) && $(JAVA) $(JFLAGS) Simulation ../instances/$(FILENAME)
+	cd $(BASE)$(BINDIR) && $(JAVA) $(JFLAGS) Simulation $(INSTANCES)
 
 
 %.jar: %.class

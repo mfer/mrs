@@ -1,1 +1,3 @@
 *.class
+instances/
+bin/

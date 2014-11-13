@@ -4,7 +4,7 @@ public class PG{
 
   private static boolean IS(Set<Integer> C, Grafo G){
     //return true if the set is independent, false otherwise
-    //check pairwise if the solution is an independent set 
+    //check pairwise if the solution is an independent set
     //(no edge between the selected nodes)
 
     for(int a : C){
@@ -29,7 +29,7 @@ public class PG{
     ArrayList<ArrayList<Integer>> B_Ins = new ArrayList<ArrayList<Integer>>(Ins);
     ArrayList<ArrayList<Integer>> B_Outs = new ArrayList<ArrayList<Integer>>(Outs);
 
-   
+
     //System.out.println("  Prune-Phase");
       //B ← A, S ← ∅; //S is a stack
       Set<Integer> B = new TreeSet<Integer>();
@@ -41,20 +41,20 @@ public class PG{
       while(!B.isEmpty()){
         //System.out.println("=================================");
 
-        //a ← a x-surplus link of B;                
+        //a ← a x-surplus link of B;
         a = Link.get_x_surplus(links, B, Ins, Outs);
         //System.out.println("a= "+a);
 
         //B ← B ∖ {a};
         B.removeAll(Arrays.asList(a));
         //System.out.println(B);
-          
+
 
           //**************************************************************************
           // I do not understand why this part of the code makes exist x-surplus
           // My initial idea was to be able to execute
                 //PDA.run(eps, B_links, B_Ins, B_Outs);
-          // TODO: dedicate time to understand...        
+          // TODO: dedicate time to understand...
           //**************************************************************************
             B_links.remove(links.get(a));
             //System.out.print("B_links [");
@@ -62,19 +62,19 @@ public class PG{
             //  System.out.print(l.id+", ");
             //System.out.println("]");
             B_Ins.remove(Ins.get(a));
-            for(ArrayList<Integer> bins : B_Ins){ 
+            for(ArrayList<Integer> bins : B_Ins){
               if(bins.contains(a)) bins.remove(bins.indexOf(a));
             }
             //System.out.println("B_Ins "+B_Ins);
             B_Outs.remove(Outs.get(a));
-            for(ArrayList<Integer> bouts : B_Outs){ 
+            for(ArrayList<Integer> bouts : B_Outs){
               if(bouts.contains(a)) bouts.remove(bouts.indexOf(a));
             }
             //System.out.println("B_Outs "+B_Outs);
           //**************************************************************************
 
 
-        
+
         double sum_weight_bar = 0.0;
         for(int adj : Outs.get(a)){
           //System.out.println("outs_adj: "+adj);
@@ -82,13 +82,13 @@ public class PG{
             sum_weight_bar = sum_weight_bar + links.get(adj).weight_bar;
           }
         }
-        for(int adj : Ins.get(a)){ 
+        for(int adj : Ins.get(a)){
           //System.out.println(" ins_adj: "+adj);
           if(S.search(adj)>0){
             sum_weight_bar = sum_weight_bar + links.get(adj).weight_bar;
           }
         }
-        //w_bar(a) ← w (a) − w_bar (S ∩ N (a));        
+        //w_bar(a) ← w (a) − w_bar (S ∩ N (a));
         links.get(a).set_weight_bar(links.get(a).weight - sum_weight_bar);
 
         //if w(a) > 0, push a onto S;
@@ -111,7 +111,7 @@ public class PG{
       //while S ∕= ∅,
       while(!S_reverse.empty()){
         //System.out.println("=================================");
-        //pop the top link a from S; 
+        //pop the top link a from S;
         a = S_reverse.pop();
         //System.out.println("pop "+a);
 
@@ -129,7 +129,7 @@ public class PG{
         }
       }
 
-    //return I.    
+    //return I.
     return I;
   }
 
