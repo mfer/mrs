@@ -1,0 +1,3 @@
+- Canvas has size 600x600
+- Use generator.py with last parameter equals 400 and file name "instance"
+- instance file must be place inside the application data folder
