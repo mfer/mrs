@@ -35,10 +35,10 @@ void keyReleased(){
       }   
       if(estado < 2) estado += 1;
       
-    }/*else if (keyCode == LEFT) {
-      estado -= 1;
+    }else if (keyCode == LEFT) {
+      if(estado < 2) estado -= 1;
       if(estado < 0) estado = 0;      
-    }*/
+    }
   } 
   desenha();
 }
@@ -178,8 +178,9 @@ void desenha(){
         thread.start();
         }
         //println("draw lock");
-        Semaforo.wait(1);    
-        drawEdges(D,true);
+        Semaforo.wait(1); 
+        //D = Orientate.edge(DGz);   
+        //drawEdges(D,true);
         cor = color(0,0,0);        
         drawLink(B_links);
         ArrayList S_links = new ArrayList<Link>();
@@ -205,7 +206,12 @@ void desenha(){
         background(127);
         cor = color(0,127,200);
         drawLink(D.links);
-           
+        IS_links = new ArrayList<Link>();
+        for(Link l : D.links){
+        if(I.contains(l.id))
+           IS_links.add(l);    
+        }   
+        drawLink(IS_links);   
       break;     
   }
 }
