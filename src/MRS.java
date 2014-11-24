@@ -30,15 +30,15 @@ public class MRS{
 
     ArrayList<Link> links = new ArrayList<Link>();
 
+    links.add(new Link(200, 200, 250, 150, 1.0));
+    links.add(new Link(350, 200, 350, 300, 1.0));
+    links.add(new Link(250, 100, 350, 150, 1.0));
+    links.add(new Link(80, 100, 200, 80, 1.0));
+    links.add(new Link(50, 200, 50, 300, 1.0));
+    links.add(new Link(150, 300, 150, 250, 1.0));
+    links.add(new Link(250, 300, 350, 250, 1.0));
 
-    links.add(new Link(2.0, 2.0, 2.5, 1.5, 1.0));
-    links.add(new Link(3.5, 2.0, 3.5, 3.0, 1.0));
-    links.add(new Link(2.5, 1.0, 3.5, 1.5, 1.0));
-    links.add(new Link(0.8, 1.0, 2.0, 0.8, 1.0));
-    links.add(new Link(0.5, 2.0, 0.5, 3.0, 1.0));
-    links.add(new Link(1.5, 3.0, 1.5, 2.5, 1.0));
-    links.add(new Link(2.5, 3.0, 3.5, 2.5, 1.0));
-
+/*
     links.add(new Link(2.0, 0.0, 2.0, 1.5, 1.0));
     links.add(new Link(0.0, 1.0, 1.5, 0.5, 1.0));
     links.add(new Link(4.0, 1.0, 3.0, 0.5, 1.0));
@@ -47,7 +47,7 @@ public class MRS{
     links.add(new Link(4.0, 3.0, 3.2, 3.8, 1.0));
     links.add(new Link(1.0, 4.0, 1.5, 3.1, 1.0));
     links.add(new Link(3.0, 4.0, 2.5, 3.1, 1.0));
-
+*/
 
 /*    
     System.out.println(links.size());
