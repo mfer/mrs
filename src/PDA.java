@@ -17,7 +17,7 @@ public class PDA{
     //while max a∈A x (N in D [a] ≥ (1 + ε) τ ) do
     while( get_max_x(links,Ins) >= (1+eps)*tau ){
       iteration++;
-//      System.out.println("Iteration: "+iteration);
+//      if (iteration%1000000==0)System.out.println("Iteration: "+iteration);
 //      System.out.println("  "+get_max_x(links,Ins)+" >= "+(1+eps)*tau);
 
       //a ← arg min a∈A y ( N out D [a] ) / w(a);
@@ -127,7 +127,7 @@ public class PDA{
       }
       //System.out.println();
       //**************************************************************************
-      // TODO: understand it is right the y goes to infinity...
+      // TODO: understand if it is right the y goes to infinity...
       //**************************************************************************
   }
 }

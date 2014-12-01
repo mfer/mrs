@@ -1,3 +1,4 @@
 *.class
-instances/
 bin/
+src/logs/
+src/instances/
