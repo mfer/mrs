@@ -101,6 +101,7 @@ public class Link extends Circle{
   }
 
   //Return the id of the first link that satisfy the x-surplus property
+  // when x_surplus remains -1, it was observed that there is only one element, so we returned it.
   public static Integer get_x_surplus(ArrayList<Link> links, Set<Integer> B,
                           ArrayList<ArrayList<Integer>> Ins,
                           ArrayList<ArrayList<Integer>> Outs){
@@ -136,6 +137,18 @@ public class Link extends Circle{
       }
 
     }
+
+    //returning the one las element that not satisfies xNinD >= xNout
+    if (x_surplus == -1){
+      if(B.size()>1 || B.size()==0){
+        System.out.println("What a hell!");
+        System.exit(1);
+      }else{
+        for (Iterator<Integer> it = B.iterator(); it.hasNext(); ) {
+          x_surplus = it.next();          
+        }              
+      }
+    } 
 
     return x_surplus;
   }
