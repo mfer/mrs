@@ -7,6 +7,12 @@ public class Instance {
   double eps;
   int nLinks;    
 
+  double minLength=0.1;
+  double maxLength=1.0;
+  double minZ=1.0;
+  double maxZ=1.1;
+  double escala=3.0;
+  String fixed="nLinks_"+nLinks+"__minLength_"+minLength+"__maxLength_"+maxLength+"__minZ_"+minZ+"__maxZ_"+maxZ+"__escala_"+escala;
 
   Grafo DGz, D;
   ArrayList<ArrayList<Integer>> Ins, Outs;
@@ -19,28 +25,18 @@ public class Instance {
   Set<Integer> I;    
 
 
-  public String create_DGz_File() throws IOException{
-    double minLength=0.1;
-    double maxLength=1.0;
-    double minZ=1.0;
-    double maxZ=1.1;
-    double escala=3.0;
-    String fixed="nLinks_"+nLinks+"__minLength_"+minLength+"__maxLength_"+maxLength+"__minZ_"+minZ+"__maxZ_"+maxZ+"__escala_"+escala;
+  public void create_DGz_File(int i) throws IOException{
+    try{
+      String fn="../instances/"+fixed+"__instance_"+i;
+      Process p = Runtime.getRuntime().exec("python ../gerador.py "+fn+" "+nLinks+" "+minLength+" "+maxLength+" "+minZ+" "+maxZ+" "+escala);
+      BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));        
+    }catch(Exception e){}
 
-    for(int i=1; i<=n; i++){
-      try{
-        String fn="../instances/"+fixed+"__instance_"+i;
-        Process p = Runtime.getRuntime().exec("python ../gerador.py "+fn+" "+nLinks+" "+minLength+" "+maxLength+" "+minZ+" "+maxZ+" "+escala);
-        BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));        
-      }catch(Exception e){}
-
-      try {
-          Thread.sleep(1000);                 //1000 milliseconds is one second.
-      } catch(InterruptedException ex) {
-          Thread.currentThread().interrupt();
-      }    
-    }
-    return fixed;        
+    try {
+        Thread.sleep(1000);                 //1000 milliseconds is one second.
+    } catch(InterruptedException ex) {
+        Thread.currentThread().interrupt();
+    }    
   }
 
   public void setup_DGz_File(){

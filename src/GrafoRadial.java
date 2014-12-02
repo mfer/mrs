@@ -10,7 +10,7 @@ public class GrafoRadial extends Grafo{
 
   public int adj[][];
 
-  public static void draw(ArrayList<Link> links, boolean draw_oval){
+  public static void draw(final ArrayList<Link> links, final boolean draw_oval){
     JFrame t = new JFrame();
     t.add(new JComponent() {
 

@@ -4,9 +4,6 @@ import java.util.*;
 /*
 *   call me like that:
 *      make simulation INSTANCES=<number_of_instances>
-*   before generate the samples:
-*      instance_generator.sh nLinks minLength maxLength minZ maxZ escala
-*      ./instance_generator.sh 10 0.1 1.0 1.0 2.0 2.0
 */
 
 public class Simulation {
@@ -35,8 +32,8 @@ public class Simulation {
 
     for (instance.eps = epsMin; instance.eps <= epsMax;instance.eps=instance.eps+epsStep) {
     for (instance.nLinks = nLinksMin; instance.nLinks <= nLinksMax; instance.nLinks=instance.nLinks*2) {
-      String fixed=instance.create_DGz_File();      
-      String logFile = "../logs/eps_"+String.format("%.10f", instance.eps)+"__"+fixed+".log";
+
+      String logFile = "../logs/eps_"+String.format("%.10f", instance.eps)+"__"+instance.fixed+".log";
       PrintStream log;
       try {
         log = new PrintStream(logFile);
@@ -44,12 +41,22 @@ public class Simulation {
         log.println("sol.size totalTime sol");
 
         DataSeries time = new DataSeries();
-        DataSeries ds = new DataSeries();
+        DataSeries is = new DataSeries();
 
         for (i = 1; i <= instance.n; i++) {
 
-          instance.filename = fixed+"__instance_"+i;
-          instance.setup_DGz_File();
+          
+          /*use this ... */
+            instance.create_DGz_File(i);      
+            instance.filename = instance.fixed+"__instance_"+i;
+            instance.setup_DGz_File();
+          /**/
+
+          /*... xor that.*/
+            //instance.setup();
+          /**/
+
+
 
           long startTime = System.currentTimeMillis();
           Set<Integer> sol = instance.run();
@@ -59,14 +66,14 @@ public class Simulation {
           log.println(sol.size()+" "+totalTime+" "+sol);
 
           time.addSample(totalTime);
-          ds.addSample(sol.size());
+          is.addSample(sol.size());
         }
 
           log.println("END");
           log.println("TIME MEAN, VAR, STD: "+time.getMean()+", "+
             time.getVariance()+", "+time.getStandardDeviation());
-          log.println("ISSIZE MEAN, VAR, STD: "+ds.getMean()+", "+
-            ds.getVariance()+", "+ds.getStandardDeviation());
+          log.println("ISSIZE MEAN, VAR, STD: "+is.getMean()+", "+
+            is.getVariance()+", "+is.getStandardDeviation());
 
       } catch (FileNotFoundException e) {
         e.printStackTrace();

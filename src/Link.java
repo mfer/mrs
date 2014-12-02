@@ -123,8 +123,6 @@ public class Link extends Circle{
       }
       //System.out.println(" x(NoutD["+links.indexOf(link)+"])= "+xNoutD);
 
-
-
       if(xNinD >= xNoutD){
         //System.out.println("x-surplus link of A= "+a);
 
@@ -142,13 +140,24 @@ public class Link extends Circle{
     if (x_surplus == -1){
       if(B.size()>1 || B.size()==0){
         System.out.println(B);        
-        System.out.println("What a hell!B has more than one element. And none x-surplus");
-        System.exit(1);
-
+        System.out.println("What a hell! B has more than one element. And none x-surplus?");
+        //System.exit(1);
         
-        //Inocent tentative: take the first.
+        //Innocent tentative: take the last. DEAD CODE: make it alive commenting the System.exit(1) line.
         for (Iterator<Integer> it = B.iterator(); it.hasNext(); ) {
-          x_surplus = it.next();          
+          x_surplus = it.next();
+
+          double xNinD = 0.0;
+          for(int adj : Ins.get(x_surplus)){ 
+            xNinD = xNinD + links.get(adj).x;
+          }
+          System.out.print("x(NinD["+x_surplus+"])= "+xNinD);
+
+          double xNoutD = 0.0;
+          for(int adj : Outs.get(x_surplus)){ 
+            xNoutD = xNoutD + links.get(adj).x;
+          }
+          System.out.println(" <  x(NoutD["+x_surplus+"])= "+xNoutD);
         }              
 
       }else{
