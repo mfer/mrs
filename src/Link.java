@@ -141,8 +141,16 @@ public class Link extends Circle{
     //returning the one las element that not satisfies xNinD >= xNout
     if (x_surplus == -1){
       if(B.size()>1 || B.size()==0){
-        System.out.println("What a hell!");
+        System.out.println(B);        
+        System.out.println("What a hell!B has more than one element. And none x-surplus");
         System.exit(1);
+
+        
+        //Inocent tentative: take the first.
+        for (Iterator<Integer> it = B.iterator(); it.hasNext(); ) {
+          x_surplus = it.next();          
+        }              
+
       }else{
         for (Iterator<Integer> it = B.iterator(); it.hasNext(); ) {
           x_surplus = it.next();          

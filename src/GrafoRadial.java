@@ -6,7 +6,7 @@ import java.awt.geom.AffineTransform;
 import javax.swing.*;
 
 
-public class GrafoRadial {
+public class GrafoRadial extends Grafo{
 
   public int adj[][];
 
@@ -187,6 +187,7 @@ public class GrafoRadial {
     System.out.println("delta_length "+delta_length);
   }
 
+/*
   //create a special disk graph (DGz) from the links
   public GrafoRadial(ArrayList<Link> links){
     int i,j;
@@ -199,7 +200,7 @@ public class GrafoRadial {
 
     //set adjacency using geometric intersection
     set_adjacency(links);
-/*
+
     System.out.print("-  ");
     for(i=0;i<links.size();i++)
       System.out.print(i+" ");
@@ -211,7 +212,16 @@ public class GrafoRadial {
       }
       System.out.println();
     }
+
+  }
 */
-     
-  }    
+
+  GrafoRadial(int nLinks, boolean bidirecional) {
+    super(nLinks, bidirecional);
+  }
+
+  GrafoRadial(ArrayList<Link> links) {
+    super(links);
+  }  
+   
 }

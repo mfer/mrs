@@ -25,12 +25,13 @@ public class Simulation {
 
     Instance instance = new Instance();
 
-    int nLinks;    
+
     //IMPORTANT: for epsMin lower than 10^(-10)=0.0000000001 change the String.format below...
     double epsMin = 0.001, epsMax = 0.100, epsStep=0.005; 
+    int nLinksMin = 16, nLinksMax = 32;
 
     int numInstances = Integer.parseInt(args[0]), i;
-    int numLinks = 16;
+    
     double minLength=0.1;
     double maxLength=1.0;
     double minZ=1.0;
@@ -39,9 +40,9 @@ public class Simulation {
     
 
     for (instance.eps = epsMin; instance.eps <= epsMax;instance.eps=instance.eps+epsStep) {
-    for (nLinks = 16; nLinks <= numLinks; nLinks=nLinks*2) {
+    for (instance.nLinks = nLinksMin; instance.nLinks <= nLinksMax; instance.nLinks=instance.nLinks*2) {
 
-      String fixed="nLinks_"+nLinks+"__minLength_"+minLength+"__maxLength_"+maxLength+"__minZ_"+minZ+"__maxZ_"+maxZ+"__escala_"+escala;
+      String fixed="nLinks_"+instance.nLinks+"__minLength_"+minLength+"__maxLength_"+maxLength+"__minZ_"+minZ+"__maxZ_"+maxZ+"__escala_"+escala;
       String logFile = "../logs/eps_"+String.format("%.10f", instance.eps)+"__"+fixed+".log";
       PrintStream log;
       try {
@@ -55,9 +56,9 @@ public class Simulation {
         for (i = 1; i <= numInstances; i++) {
 
           instance.filename = fixed+"__instance_"+i;
-          long startTime = System.currentTimeMillis();
-          instance.setup();
+          instance.setup_DGz_File();
 
+          long startTime = System.currentTimeMillis();
           Set<Integer> sol = instance.run();
           long endTime   = System.currentTimeMillis();
           long totalTime = endTime - startTime;
