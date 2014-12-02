@@ -2,10 +2,11 @@ import java.io.*;
 import java.util.*;
 
 public class Instance {
-
+  int n; //Number of copies of this type of Instance
   String filename;
   double eps;
   int nLinks;    
+
 
   Grafo DGz, D;
   ArrayList<ArrayList<Integer>> Ins, Outs;
@@ -17,8 +18,35 @@ public class Instance {
   Stack<Integer> S;
   Set<Integer> I;    
 
+
+  public String create_DGz_File() throws IOException{
+    double minLength=0.1;
+    double maxLength=1.0;
+    double minZ=1.0;
+    double maxZ=1.1;
+    double escala=3.0;
+    String fixed="nLinks_"+nLinks+"__minLength_"+minLength+"__maxLength_"+maxLength+"__minZ_"+minZ+"__maxZ_"+maxZ+"__escala_"+escala;
+
+    for(int i=1; i<=n; i++){
+      try{
+        String fn="../instances/"+fixed+"__instance_"+i;
+        Process p = Runtime.getRuntime().exec("python ../gerador.py "+fn+" "+nLinks+" "+minLength+" "+maxLength+" "+minZ+" "+maxZ+" "+escala);
+        BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));        
+      }catch(Exception e){}
+
+      try {
+          Thread.sleep(1000);                 //1000 milliseconds is one second.
+      } catch(InterruptedException ex) {
+          Thread.currentThread().interrupt();
+      }    
+    }
+    return fixed;        
+  }
+
   public void setup_DGz_File(){
+
     Link.nlinks=0; //this line is terrible cheat to make the damn PDA.xNinD works well...
+
     try{
       DGz = InstanceReader.readInstance("../instances/"+filename);      
     }catch(IOException e){

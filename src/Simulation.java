@@ -22,27 +22,20 @@ public class Simulation {
       System.out.println("  python gerador.py filename nLinks minLength maxLength minZ maxZ escala");
       System.exit(0);
     }
+    
 
     Instance instance = new Instance();
-
+    instance.n = Integer.parseInt(args[0]);
+    int i;
 
     //IMPORTANT: for epsMin lower than 10^(-10)=0.0000000001 change the String.format below...
     double epsMin = 0.001, epsMax = 0.100, epsStep=0.005; 
     int nLinksMin = 16, nLinksMax = 32;
-
-    int numInstances = Integer.parseInt(args[0]), i;
-    
-    double minLength=0.1;
-    double maxLength=1.0;
-    double minZ=1.0;
-    double maxZ=1.1;
-    double escala=3.0;
-    
+       
 
     for (instance.eps = epsMin; instance.eps <= epsMax;instance.eps=instance.eps+epsStep) {
     for (instance.nLinks = nLinksMin; instance.nLinks <= nLinksMax; instance.nLinks=instance.nLinks*2) {
-
-      String fixed="nLinks_"+instance.nLinks+"__minLength_"+minLength+"__maxLength_"+maxLength+"__minZ_"+minZ+"__maxZ_"+maxZ+"__escala_"+escala;
+      String fixed=instance.create_DGz_File();      
       String logFile = "../logs/eps_"+String.format("%.10f", instance.eps)+"__"+fixed+".log";
       PrintStream log;
       try {
@@ -53,7 +46,7 @@ public class Simulation {
         DataSeries time = new DataSeries();
         DataSeries ds = new DataSeries();
 
-        for (i = 1; i <= numInstances; i++) {
+        for (i = 1; i <= instance.n; i++) {
 
           instance.filename = fixed+"__instance_"+i;
           instance.setup_DGz_File();
