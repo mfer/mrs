@@ -6,11 +6,13 @@ import java.awt.geom.AffineTransform;
 import javax.swing.*;
 
 
+
 public class GrafoRadial extends Grafo{
 
   public int adj[][];
 
-  public static void draw(final ArrayList<Link> links, final boolean draw_oval){
+  public static void draw(final ArrayList<Link> links, final boolean draw_oval,double scaleD){
+    int scale = (int)scaleD;
     JFrame t = new JFrame();
     t.add(new JComponent() {
 
@@ -48,38 +50,38 @@ public class GrafoRadial extends Grafo{
 
           int shift = 20;
 
-          drawArrow(g, 100*links.get(linkIndex).sender.x + shift, 
-            100*links.get(linkIndex).sender.y + shift,
-            100*links.get(linkIndex).receiver.x + shift, 
-            100*links.get(linkIndex).receiver.y + shift );          
+          drawArrow(g, links.get(linkIndex).sender.x*scaleD+ shift,
+            links.get(linkIndex).sender.y*scaleD + shift,
+            links.get(linkIndex).receiver.x*scaleD + shift,
+            links.get(linkIndex).receiver.y*scaleD + shift );
 
-          g.drawOval((int)(100*links.get(linkIndex).sender.x)-5 + shift, 
-            (int)(100*links.get(linkIndex).sender.y-5) + shift,
-            10,10);
+          g.drawOval((int)(links.get(linkIndex).sender.x*scaleD)-5 + shift,
+            (int)(links.get(linkIndex).sender.y*scaleD-5) + shift,
+            5,5);
 
           if(draw_oval){
 
-
             g.drawString(""+linkIndex,
-              (int)(100*links.get(linkIndex).sender.x)-5 + shift, 
-              (int)(100*links.get(linkIndex).sender.y-5 + shift));
+              (int)(links.get(linkIndex).sender.x*scaleD)-5 + shift,
+              (int)(links.get(linkIndex).sender.y*scaleD)-5 + shift);
 
-            int r = (int)(200*links.get(linkIndex).sender.distance(links.get(linkIndex).receiver));
-            g.drawOval((int)(100*links.get(linkIndex).sender.x)-r/2 + shift, 
-              (int)(100*links.get(linkIndex).sender.y-r/2 + shift),
+            int r = (int)(2*scaleD*links.get(linkIndex).sender.distance(links.get(linkIndex).receiver));
+
+            g.drawOval((int)(links.get(linkIndex).sender.x*scaleD-r/2) + shift,
+              (int)(links.get(linkIndex).sender.y*scaleD-r/2 )+ shift,
               r,r);
           }else{
             //g.drawString(""+links.get(0).weight,
-            //  (int)(100*links.get(linkIndex).sender.x)-5 + shift, 
-            //  (int)(100*links.get(linkIndex).sender.y-5 + shift));            
+            //  (int)(scaleD*links.get(linkIndex).sender.x)-5 + shift,
+            //  (int)(scaleD*links.get(linkIndex).sender.y-5 + shift));
           }
-        }       
-        
+        }
+
       }
     });
 
     t.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    t.setSize(500, 500);
+    t.setSize(900, 900);
     t.setVisible(true);
   }
 
@@ -88,7 +90,7 @@ public class GrafoRadial extends Grafo{
     double len_lx;
     double zMin; //mult constant for link lx
     double ringWidth; //aux var
-    
+
     double betaLenMin = 1.0;//Math.pow(links.get(0).beta, (double)1/(double)Link.ALPHA)*links.get(0).length; //min(beta_x^(1/alpha)*l_x)
 
     idx_lx = 0;
@@ -102,17 +104,17 @@ public class GrafoRadial extends Grafo{
     len_lx = links.get(idx_lx).length;
 
     int KinFormula = 1;
-    zMin = 1.0;//KinFormula*(Math.pow((double)(links.get(idx_lx).beta * Link.ALPHA * 4.0 * (double)Link.CIDDD/(double)(Link.ALPHA-2)), (double)1.0/(double)Link.ALPHA)); 
+    zMin = 1.0;//KinFormula*(Math.pow((double)(links.get(idx_lx).beta * Link.ALPHA * 4.0 * (double)Link.CIDDD/(double)(Link.ALPHA-2)), (double)1.0/(double)Link.ALPHA));
     ringWidth = zMin * len_lx/ KinFormula;
-    
+
     double betax = 1.0;//links.get(idx_lx).beta;
-    
+
 //      links.get(idx_lx).setRadius(zMin * len_lx);
-    
+
     //System.out.println("idx_lx="+idx_lx+", betaLenMin="+betaLenMin+", len_lx="+
     //    len_lx+", betax="+betax+", zMin="+zMin+", ringW="+
     //    ringWidth + ", rx = "+links.get(idx_lx).radius);
-    
+
     for(int i=0; i < links.size(); i++){
       if (i != idx_lx) {
         double c = 1.0;//Link.CIDDD;
@@ -120,14 +122,14 @@ public class GrafoRadial extends Grafo{
         double bi = 1.0;//links.get(i).beta;
         double a = 1.0;//Link.ALPHA;
 
-        double gi1 = Math.pow( ((double)(a-1)/(double)(a-2)) * Math.pow((double)(KinFormula*li)/((double)zMin*len_lx), a) * bi * a * 4.0 * c, 
+        double gi1 = Math.pow( ((double)(a-1)/(double)(a-2)) * Math.pow((double)(KinFormula*li)/((double)zMin*len_lx), a) * bi * a * 4.0 * c,
             (double)1/(double)(a-2));
-        double gi2 = Math.pow( ((double)1/(double)(a-2)) * Math.pow((double)(KinFormula*li)/(double)(zMin*len_lx), a) * bi * a * 4.0 * c, 
+        double gi2 = Math.pow( ((double)1/(double)(a-2)) * Math.pow((double)(KinFormula*li)/(double)(zMin*len_lx), a) * bi * a * 4.0 * c,
             (double)1/(double)(a-2)) + 1;
 
         double gMin = Math.min(gi1, gi2);
         gMin = Math.max(gMin, 2);
-        
+
         double zi = gMin * (double)ringWidth / li;
 
         double raio1 = gi1 * ringWidth;
@@ -135,7 +137,7 @@ public class GrafoRadial extends Grafo{
         double t1 = Math.pow((double)(2*li)/((double)zMin*len_lx), a);
 //        links.get(i).setRadius(gMin * ringWidth);
       }
-    } 
+    }
 
 
     links.get(0).set_weight( 1.0 );
@@ -153,29 +155,29 @@ public class GrafoRadial extends Grafo{
     int adj[][] = new int[links.size()][links.size()];
     ArrayList<Link> linked = new ArrayList<Link>();
 
-    draw(links, true);
+    draw(links, true, 100);
 
     for(i=0;i<links.size();i++){
       degree[i]=0;
     }
 
-    for(i=0;i<links.size();i++){      
+    for(i=0;i<links.size();i++){
       for(j=i+1;j<links.size();j++){
         if( links.get(i).intersects(links.get(j)) ){
-          System.out.println(i + " " + j);          
+          System.out.println(i + " " + j);
           adj[i][j]=1;
           adj[j][i]=1;
 
           degree[i]++;
           degree[j]++;
 
-          linked.add(new Link(links.get(i).sender.x, links.get(i).sender.y, 
+          linked.add(new Link(links.get(i).sender.x, links.get(i).sender.y,
             links.get(j).sender.x, links.get(j).sender.y, 2.0));
         }
-      }      
+      }
     }
 
-    draw(linked, false);
+    draw(linked, false, 100);
 
     this.adj=adj;
   }
@@ -191,7 +193,7 @@ public class GrafoRadial extends Grafo{
   //create a special disk graph (DGz) from the links
   public GrafoRadial(ArrayList<Link> links){
     int i,j;
-    
+
     //set the interference_radius of the links
     set_interference_radius(links);
 
@@ -222,6 +224,6 @@ public class GrafoRadial extends Grafo{
 
   GrafoRadial(ArrayList<Link> links) {
     super(links);
-  }  
-   
+  }
+
 }

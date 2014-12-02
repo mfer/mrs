@@ -19,21 +19,22 @@ public class Simulation {
       System.out.println("  python gerador.py filename nLinks minLength maxLength minZ maxZ escala");
       System.exit(0);
     }
-    
+
 
     Instance instance = new Instance();
     instance.n = Integer.parseInt(args[0]);
     int i;
 
     //IMPORTANT: for epsMin lower than 10^(-10)=0.0000000001 change the String.format below...
-    double epsMin = 0.001, epsMax = 0.100, epsStep=0.005; 
-    int nLinksMin = 16, nLinksMax = 32;
-       
+    double epsMin = 0.001, epsMax = 0.001, epsStep=0.005;
+    int nLinksMin = 16, nLinksMax = 16;
+
 
     for (instance.eps = epsMin; instance.eps <= epsMax;instance.eps=instance.eps+epsStep) {
     for (instance.nLinks = nLinksMin; instance.nLinks <= nLinksMax; instance.nLinks=instance.nLinks*2) {
 
-      String logFile = "../logs/eps_"+String.format("%.10f", instance.eps)+"__"+instance.fixed+".log";
+      instance.setFixed();
+      String logFile = "../logs/eps_"+String.format("%.10f", instance.eps)+"__"+instance.getFixed()+".log";
       PrintStream log;
       try {
         log = new PrintStream(logFile);
@@ -45,17 +46,13 @@ public class Simulation {
 
         for (i = 1; i <= instance.n; i++) {
 
-          
           /*use this ... */
-            instance.create_DGz_File(i);      
-            instance.filename = instance.fixed+"__instance_"+i;
+            instance.setFilename(i);  //System.out. println(instance.getFilename());
+            instance.create_DGz_File(i);
             instance.setup_DGz_File();
-          /**/
 
           /*... xor that.*/
             //instance.setup();
-          /**/
-
 
 
           long startTime = System.currentTimeMillis();

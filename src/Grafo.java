@@ -13,7 +13,6 @@ public class Grafo{
       this.bidirecional = bidirecional;
 
       for(int i = 0; i < nLinks; i++){
-
         this.adjacencia.add( new ArrayList<Integer>() );
       }
     }
@@ -25,14 +24,17 @@ public class Grafo{
       this.adjacencia = new ArrayList<ArrayList<Integer>>();
       this.bidirecional = false;
 
-      for(i=0;i<links.size();i++){      
+      for(i=0;i<links.size();i++){
         this.adjacencia.add( new ArrayList<Integer>() );
+
         for(j=i+1;j<links.size();j++){
+          //System.out.print(i + "  " + j + ":");
           if( links.get(i).intersects(links.get(j)) ){
-            //System.out.println("  i: " + i + "  j: " + j);          
+            //System.out.println(" instersects");
             setAdjacencia(i,j);
           }
-        }      
+          //System.out.println();
+        }
       }
 
     }
